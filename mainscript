@@ -1,108 +1,108 @@
-local icJDGh = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local lmbqJa = icJDGh.CreateLib("Soka Hub", "DarkTheme")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Soka Hub", "DarkTheme")
 
 -- Services
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
-local EuMooA = Players.EuMooA
-local bpwbsq = workspace.CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
 local UserInputService = game:GetService("UserInputService")
 
--- Global table for all pEtohk
-local pEtohk = {}
+-- Global table for all connections
+local connections = {}
 
 -- States
-local LXOMbb = false
-local RWnVqs = false
-local CTyUBu = false
-local hnceyK = 1         -- Default horizontal speed from slider (change as needed)
-local Nhldjk = 50
-local utieIx = 100
-local VWrKDF = false
-local jZStKV = true
-local mBofet = {}
-local wTYKEZ = {}
-local rSiDgZ = Color3.new(1, 0, 0)
+local FlightEnabled = false
+local SpeedEnabled = false
+local NoClipEnabled = false
+local TargetSpeed = 1         -- Default horizontal speed from slider (change as needed)
+local FlightSpeed = 50
+local DashSpeed = 100
+local DashCooldown = false
+local RunESPUpdate = true
+local NameESP = {}
+local CustomHighlights = {}
+local CustomESPColor = Color3.new(1, 0, 0)
 
 -- Main Tab
-local HJthtt = lmbqJa:NewTab("Main")
-local bdbEKX = HJthtt:NewSection("Speed")
-local dUJZIs = HJthtt:NewSection("Flight")
-local OkCcIg = HJthtt:NewSection("Dash")
-local EPmOtF = HJthtt:NewSection("Misc")
+local MainTab = Window:NewTab("Main")
+local SpeedSection = MainTab:NewSection("Speed")
+local FlightSection = MainTab:NewSection("Flight")
+local DashSection = MainTab:NewSection("Dash")
+local MiscSection = MainTab:NewSection("Misc")
 
--- Speed Toggle with smooth horizontal DjymwX update (preserves vertical DjymwX)
-bdbEKX:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X, function()
-    RWnVqs = not RWnVqs
-    if RWnVqs then
-        local BVloJZ = RunService.Heartbeat:Connect(function()
-            if EuMooA.Character and RWnVqs then
-                local dpoBMB = EuMooA.Character:FindFirstChild("HumanoidRootPart")
-                local oNENnM = EuMooA.Character:FindFirstChild("Humanoid")
-                if dpoBMB and oNENnM then
-                    local wxSaCY = oNENnM.MoveDirection
-                    local UBgcCa = dpoBMB.Velocity
-                    local dRCWLj = Vector3.new(wxSaCY.X * hnceyK, UBgcCa.Y, wxSaCY.Z * hnceyK)
-                    dpoBMB.Velocity = UBgcCa:Lerp(dRCWLj, 0.2)
+-- Speed Toggle with smooth horizontal velocity update (preserves vertical velocity)
+SpeedSection:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X, function()
+    SpeedEnabled = not SpeedEnabled
+    if SpeedEnabled then
+        local speedConnection = RunService.Heartbeat:Connect(function()
+            if LocalPlayer.Character and SpeedEnabled then
+                local hrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
+                if hrp and humanoid then
+                    local moveDir = humanoid.MoveDirection
+                    local currentVel = hrp.Velocity
+                    local desiredVel = Vector3.new(moveDir.X * TargetSpeed, currentVel.Y, moveDir.Z * TargetSpeed)
+                    hrp.Velocity = currentVel:Lerp(desiredVel, 0.2)
                 end
             end
         end)
-        table.insert(pEtohk, BVloJZ)
+        table.insert(connections, speedConnection)
     end
 end)
 
-bdbEKX:NewSlider("Speed Value", "Adjust speed value", 500, 1, function(value)
-    hnceyK = value
+SpeedSection:NewSlider("Speed Value", "Adjust speed value", 500, 1, function(value)
+    TargetSpeed = value
 end, 1)
 
 -- Flight Toggle with smooth interpolation
-dUJZIs:NewKeybind("Flight Toggle", "Toggle flight with key", Enum.KeyCode.F, function()
-    LXOMbb = not LXOMbb
-    if LXOMbb then
-        local QHeLuv = EuMooA.Character
-        if QHeLuv then
-            local oNENnM = QHeLuv:WaitForChild("Humanoid")
-            local dpoBMB = QHeLuv:WaitForChild("HumanoidRootPart")
-            local pnYHat = RunService.RenderStepped:Connect(function()
-                if LXOMbb then
-                    local dRCWLj = Vector3.new(0, 0, 0)
+FlightSection:NewKeybind("Flight Toggle", "Toggle flight with key", Enum.KeyCode.F, function()
+    FlightEnabled = not FlightEnabled
+    if FlightEnabled then
+        local char = LocalPlayer.Character
+        if char then
+            local humanoid = char:WaitForChild("Humanoid")
+            local hrp = char:WaitForChild("HumanoidRootPart")
+            local flightConn = RunService.RenderStepped:Connect(function()
+                if FlightEnabled then
+                    local desiredVel = Vector3.new(0, 0, 0)
                     if UserInputService:IsKeyDown(Enum.KeyCode.W) then
-                        dRCWLj = dRCWLj + (bpwbsq.CFrame.LookVector * Nhldjk)
+                        desiredVel = desiredVel + (Camera.CFrame.LookVector * FlightSpeed)
                     end
                     if UserInputService:IsKeyDown(Enum.KeyCode.S) then
-                        dRCWLj = dRCWLj - (bpwbsq.CFrame.LookVector * Nhldjk)
+                        desiredVel = desiredVel - (Camera.CFrame.LookVector * FlightSpeed)
                     end
                     if UserInputService:IsKeyDown(Enum.KeyCode.D) then
-                        dRCWLj = dRCWLj + (bpwbsq.CFrame.RightVector * Nhldjk)
+                        desiredVel = desiredVel + (Camera.CFrame.RightVector * FlightSpeed)
                     end
                     if UserInputService:IsKeyDown(Enum.KeyCode.A) then
-                        dRCWLj = dRCWLj - (bpwbsq.CFrame.RightVector * Nhldjk)
+                        desiredVel = desiredVel - (Camera.CFrame.RightVector * FlightSpeed)
                     end
                     if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
-                        dRCWLj = dRCWLj + Vector3.new(0, Nhldjk, 0)
+                        desiredVel = desiredVel + Vector3.new(0, FlightSpeed, 0)
                     end
                     if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-                        dRCWLj = dRCWLj - Vector3.new(0, Nhldjk, 0)
+                        desiredVel = desiredVel - Vector3.new(0, FlightSpeed, 0)
                     end
-                    dpoBMB.Velocity = dpoBMB.Velocity:Lerp(dRCWLj, 0.1)
+                    hrp.Velocity = hrp.Velocity:Lerp(desiredVel, 0.1)
                 end
             end)
-            table.insert(pEtohk, pnYHat)
+            table.insert(connections, flightConn)
         end
     end
 end)
 
-dUJZIs:NewSlider("Flight Speed", "Adjust flight speed", 500, 1, function(value)
-    Nhldjk = value
+FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 500, 1, function(value)
+    FlightSpeed = value
 end)
 
 -- Clean NoClip toggle using BindToRenderStep and UnbindFromRenderStep for a single connection
-EPmOtF:NewToggle("NoClip", "Phase through objects", function(state)
-    CTyUBu = state
-    if CTyUBu then
+MiscSection:NewToggle("NoClip", "Phase through objects", function(state)
+    NoClipEnabled = state
+    if NoClipEnabled then
         RunService:BindToRenderStep("NoClip", 100, function()
-            if EuMooA.Character then
-                for _, part in pairs(EuMooA.Character:GetDescendants()) do
+            if LocalPlayer.Character then
+                for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
                     if part:IsA("BasePart") then
                         part.CanCollide = false
                     end
@@ -115,108 +115,108 @@ EPmOtF:NewToggle("NoClip", "Phase through objects", function(state)
 end)
 
 local function SmoothNoFallDamage()
-    if EuMooA.Character then
-        local QbHcTe = EuMooA.Character:WaitForChild("Humanoid")
-        local KUMauV = EuMooA.Character:WaitForChild("HumanoidRootPart")
-        local xLwGxR = QbHcTe.StateChanged:Connect(function(_, new)
+    if LocalPlayer.Character then
+        local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
+        local HRP = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+        local stateCon = Humanoid.StateChanged:Connect(function(_, new)
             if new == Enum.HumanoidStateType.Landed then
                 task.wait()
-                QbHcTe.Health = QbHcTe.Health
+                Humanoid.Health = Humanoid.Health
             end
         end)
-        table.insert(pEtohk, xLwGxR)
-        local uMSzyW = QbHcTe.Health
-        local MdbqSw = QbHcTe:GetPropertyChangedSignal("Health"):Connect(function()
-            if QbHcTe.Health < uMSzyW then
-                local DjymwX = KUMauV.Velocity
-                if DjymwX.Y < -50 then
-                    QbHcTe.Health = uMSzyW
+        table.insert(connections, stateCon)
+        local lastHealth = Humanoid.Health
+        local healthCon = Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+            if Humanoid.Health < lastHealth then
+                local velocity = HRP.Velocity
+                if velocity.Y < -50 then
+                    Humanoid.Health = lastHealth
                 end
             end
-            uMSzyW = QbHcTe.Health
+            lastHealth = Humanoid.Health
         end)
-        table.insert(pEtohk, MdbqSw)
+        table.insert(connections, healthCon)
     end
 end
 
-EPmOtF:NewToggle("No Fall Damage", "Prevents fall damage smoothly", function(state)
+MiscSection:NewToggle("No Fall Damage", "Prevents fall damage smoothly", function(state)
     if state then
         SmoothNoFallDamage()
     end
 end)
 
-OkCcIg:NewKeybind("Dash", "Press to dash", Enum.KeyCode.Q, function()
-    if not VWrKDF and EuMooA.Character then
-        VWrKDF = true
-        local KUMauV = EuMooA.Character:FindFirstChild("HumanoidRootPart")
-        if KUMauV then
-            local WbxXKB = Instance.new("BodyVelocity")
-            WbxXKB.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            WbxXKB.Velocity = bpwbsq.CFrame.LookVector * utieIx
-            WbxXKB.Parent = KUMauV
-            game:GetService("Debris"):AddItem(WbxXKB, 0.2)
+DashSection:NewKeybind("Dash", "Press to dash", Enum.KeyCode.Q, function()
+    if not DashCooldown and LocalPlayer.Character then
+        DashCooldown = true
+        local HRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if HRP then
+            local BV = Instance.new("BodyVelocity")
+            BV.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            BV.Velocity = Camera.CFrame.LookVector * DashSpeed
+            BV.Parent = HRP
+            game:GetService("Debris"):AddItem(BV, 0.2)
             task.wait(1)
-            VWrKDF = false
+            DashCooldown = false
         end
     end
 end)
 
-OkCcIg:NewSlider("Dash Force", "Adjust dash force", 500, 50, function(value)
-    utieIx = value
+DashSection:NewSlider("Dash Force", "Adjust dash force", 500, 50, function(value)
+    DashSpeed = value
 end)
 
 -- Visual Tab for ESP
-local jeHtEt = lmbqJa:NewTab("Visual")
-local JSfexU = jeHtEt:NewSection("ESP")
+local VisualTab = Window:NewTab("Visual")
+local ESPSection = VisualTab:NewSection("ESP")
 
 local function CreateNameESP(player)
-    local aPALMC = Instance.new("BillboardGui")
-    aPALMC.Name = "NameESP"
-    aPALMC.Size = UDim2.new(0, 200, 0, 50)
-    aPALMC.AlwaysOnTop = true
-    aPALMC.StudsOffset = Vector3.new(0, 2, 0)
-    local QjqACO = Instance.new("TextLabel")
-    QjqACO.Name = "PlayerName"
-    QjqACO.BackgroundTransparency = 1
-    QjqACO.Size = UDim2.new(1, 0, 0, 20)
-    QjqACO.Font = Enum.Font.SourceSansBold
-    QjqACO.TextColor3 = Color3.new(1, 1, 1)
-    QjqACO.TextSize = 14
-    QjqACO.Text = player.Name
-    QjqACO.Parent = aPALMC
-    return aPALMC
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "NameESP"
+    billboard.Size = UDim2.new(0, 200, 0, 50)
+    billboard.AlwaysOnTop = true
+    billboard.StudsOffset = Vector3.new(0, 2, 0)
+    local name = Instance.new("TextLabel")
+    name.Name = "PlayerName"
+    name.BackgroundTransparency = 1
+    name.Size = UDim2.new(1, 0, 0, 20)
+    name.Font = Enum.Font.SourceSansBold
+    name.TextColor3 = Color3.new(1, 1, 1)
+    name.TextSize = 14
+    name.Text = player.Name
+    name.Parent = billboard
+    return billboard
 end
 
 local function UpdateAllESP()
-    while jZStKV do
+    while RunESPUpdate do
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= EuMooA then
+            if player ~= LocalPlayer then
                 if player.Character and player.Character:FindFirstChild("Head") then
-                    if mBofet[player] then
+                    if NameESP[player] then
                         if not player.Character.Head:FindFirstChild("NameESP") then
-                            local FfJibf = CreateNameESP(player)
-                            mBofet[player] = FfJibf
-                            FfJibf.Parent = player.Character.Head
+                            local esp = CreateNameESP(player)
+                            NameESP[player] = esp
+                            esp.Parent = player.Character.Head
                         end
                     end
                     if player.Character:FindFirstChild("Humanoid") then
-                        local ngZryi = player.Character:FindFirstChild("ESP_Highlight")
-                        if ngZryi then
-                            local kaKqbe = player.Character.QbHcTe.Health
-                            local fzSNwA = player.Character.QbHcTe.MaxHealth
-                            local ILbYwn = kaKqbe / fzSNwA
-                            ngZryi.FillColor = Color3.new(1 - ILbYwn, ILbYwn, 0)
+                        local highlight = player.Character:FindFirstChild("ESP_Highlight")
+                        if highlight then
+                            local health = player.Character.Humanoid.Health
+                            local maxHealth = player.Character.Humanoid.MaxHealth
+                            local healthPercent = health / maxHealth
+                            highlight.FillColor = Color3.new(1 - healthPercent, healthPercent, 0)
                         end
                     end
-                    if wTYKEZ[player] then
+                    if CustomHighlights[player] then
                         if not player.Character:FindFirstChild("Highlight") then
-                            local ngZryi = Instance.new("Highlight")
-                            ngZryi.FillTransparency = 0.5
-                            ngZryi.OutlineTransparency = 0
-                            ngZryi.FillColor = rSiDgZ
-                            ngZryi.OutlineColor = Color3.new(1, 1, 1)
-                            ngZryi.Parent = player.Character
-                            wTYKEZ[player] = ngZryi
+                            local highlight = Instance.new("Highlight")
+                            highlight.FillTransparency = 0.5
+                            highlight.OutlineTransparency = 0
+                            highlight.FillColor = CustomESPColor
+                            highlight.OutlineColor = Color3.new(1, 1, 1)
+                            highlight.Parent = player.Character
+                            CustomHighlights[player] = highlight
                         end
                     end
                 end
@@ -226,82 +226,82 @@ local function UpdateAllESP()
     end
 end
 
-JSfexU:NewToggle("Name ESP", "Shows player names", function(state)
+ESPSection:NewToggle("Name ESP", "Shows player names", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= EuMooA and player.Character then
-                local FfJibf = CreateNameESP(player)
-                mBofet[player] = FfJibf
-                FfJibf.Parent = player.Character:WaitForChild("Head")
+            if player ~= LocalPlayer and player.Character then
+                local esp = CreateNameESP(player)
+                NameESP[player] = esp
+                esp.Parent = player.Character:WaitForChild("Head")
             end
         end
     else
-        for _, FfJibf in pairs(mBofet) do
-            FfJibf:Destroy()
+        for _, esp in pairs(NameESP) do
+            esp:Destroy()
         end
-        mBofet = {}
+        NameESP = {}
     end
 end)
 
-JSfexU:NewToggle("Health ESP", "Shows health-based highlights", function(state)
+ESPSection:NewToggle("Health ESP", "Shows health-based highlights", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= EuMooA and player.Character then
-                local ngZryi = Instance.new("Highlight")
-                ngZryi.Name = "ESP_Highlight"
-                ngZryi.Parent = player.Character
+            if player ~= LocalPlayer and player.Character then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Parent = player.Character
             end
         end
     else
         for _, player in ipairs(Players:GetPlayers()) do
             if player.Character then
-                local ngZryi = player.Character:FindFirstChild("ESP_Highlight")
-                if ngZryi then ngZryi:Destroy() end
+                local highlight = player.Character:FindFirstChild("ESP_Highlight")
+                if highlight then highlight:Destroy() end
             end
         end
     end
 end)
 
-JSfexU:NewColorPicker("ESP Color", "Pick custom ESP color", Color3.new(1, 0, 0), function(color)
-    rSiDgZ = color
-    for _, ngZryi in pairs(wTYKEZ) do
-        ngZryi.FillColor = color
+ESPSection:NewColorPicker("ESP Color", "Pick custom ESP color", Color3.new(1, 0, 0), function(color)
+    CustomESPColor = color
+    for _, highlight in pairs(CustomHighlights) do
+        highlight.FillColor = color
     end
 end)
 
-JSfexU:NewToggle("Custom ESP", "Shows custom color highlights", function(state)
+ESPSection:NewToggle("Custom ESP", "Shows custom color highlights", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= EuMooA and player.Character then
-                local ngZryi = Instance.new("Highlight")
-                ngZryi.FillTransparency = 0.5
-                ngZryi.OutlineTransparency = 0
-                ngZryi.FillColor = rSiDgZ
-                ngZryi.OutlineColor = Color3.new(1, 1, 1)
-                ngZryi.Parent = player.Character
-                wTYKEZ[player] = ngZryi
+            if player ~= LocalPlayer and player.Character then
+                local highlight = Instance.new("Highlight")
+                highlight.FillTransparency = 0.5
+                highlight.OutlineTransparency = 0
+                highlight.FillColor = CustomESPColor
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.Parent = player.Character
+                CustomHighlights[player] = highlight
             end
         end
     else
-        for _, ngZryi in pairs(wTYKEZ) do
-            ngZryi:Destroy()
+        for _, highlight in pairs(CustomHighlights) do
+            highlight:Destroy()
         end
-        wTYKEZ = {}
+        CustomHighlights = {}
     end
 end)
 
-JSfexU:NewToggle("Stop ESP Updates", "Stops all ESP updates", function(state)
-    jZStKV = not state
-    if jZStKV then
+ESPSection:NewToggle("Stop ESP Updates", "Stops all ESP updates", function(state)
+    RunESPUpdate = not state
+    if RunESPUpdate then
         task.spawn(UpdateAllESP)
     end
 end)
 
 -- Settings Tab
-local pmroFV = lmbqJa:NewTab("Settings")
-local RdOpnr = pmroFV:NewSection("GUI Settings")
+local SettingsTab = Window:NewTab("Settings")
+local SettingsSection = SettingsTab:NewSection("GUI Settings")
 
-RdOpnr:NewDropdown("Theme", "Change UI Theme", {
+SettingsSection:NewDropdown("Theme", "Change UI Theme", {
     "DarkTheme",
     "LightTheme",
     "BloodTheme",
@@ -311,60 +311,58 @@ RdOpnr:NewDropdown("Theme", "Change UI Theme", {
     "Sentinel",
     "Synapse"
 }, function(currentTheme)
-    icJDGh:ChangeTheme(currentTheme)
+    Library:ChangeTheme(currentTheme)
 end)
 
-RdOpnr:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode.RightShift, function()
-    icJDGh:ToggleUI()
+SettingsSection:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode.RightShift, function()
+    Library:ToggleUI()
 end)
 
 local function unloadScript()
-    for _, con in ipairs(pEtohk) do
+    for _, con in ipairs(connections) do
         pcall(function() con:Disconnect() end)
     end
-    pEtohk = {}
-    jZStKV = false
-    for _, FfJibf in pairs(mBofet) do
-        if FfJibf and FfJibf.Destroy then
-            pcall(function() FfJibf:Destroy() end)
+    connections = {}
+    RunESPUpdate = false
+    for _, esp in pairs(NameESP) do
+        if esp and esp.Destroy then
+            pcall(function() esp:Destroy() end)
         end
     end
-    mBofet = {}
-    for _, ngZryi in pairs(wTYKEZ) do
-        if ngZryi and ngZryi.Destroy then
-            pcall(function() ngZryi:Destroy() end)
+    NameESP = {}
+    for _, highlight in pairs(CustomHighlights) do
+        if highlight and highlight.Destroy then
+            pcall(function() highlight:Destroy() end)
         end
     end
-    wTYKEZ = {}
-    if lmbqJa and lmbqJa.Destroy then
-        pcall(function() lmbqJa:Destroy() end)
+    CustomHighlights = {}
+    if Window and Window.Destroy then
+        pcall(function() Window:Destroy() end)
     end
     print("Script unloaded successfully.")
 end
 
-RdOpnr:NewButton("Unload Script", "Unload all changes and close the GUI", unloadScript)
+SettingsSection:NewButton("Unload Script", "Unload all changes and close the GUI", unloadScript)
 
 task.spawn(UpdateAllESP)
 
 Players.PlayerAdded:Connect(function(player)
     player.CharacterAdded:Connect(function(character)
-        if mBofet[player] then
-            local FfJibf = CreateNameESP(player)
-            mBofet[player] = FfJibf
-            FfJibf.Parent = character:WaitForChild("Head")
+        if NameESP[player] then
+            local esp = CreateNameESP(player)
+            NameESP[player] = esp
+            esp.Parent = character:WaitForChild("Head")
         end
     end)
 end)
 
 Players.PlayerRemoving:Connect(function(player)
-    if mBofet[player] then
-        pcall(function() mBofet[player]:Destroy() end)
-        mBofet[player] = nil
+    if NameESP[player] then
+        pcall(function() NameESP[player]:Destroy() end)
+        NameESP[player] = nil
     end
-    if wTYKEZ[player] then
-        pcall(function() wTYKEZ[player]:Destroy() end)
-        wTYKEZ[player] = nil
+    if CustomHighlights[player] then
+        pcall(function() CustomHighlights[player]:Destroy() end)
+        CustomHighlights[player] = nil
     end
 end)
-
-

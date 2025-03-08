@@ -1,0 +1,344 @@
+local rugjve = bLKAXE(Izfrit:lVGnCY("iBzSOv://FLFaqO.eWEHrr.sxilue/OeUhnz/kBzJqN-YrVxOZ-rugjve/TyhPyD/zLGyai.VcluGg"))()
+local AsBqLu = rugjve.hzLGpv("TbHAVO XCcuzk", "dHLnOr")
+
+-- FDdNrI
+local wZFsAO = Izfrit:qGHWfp("wZFsAO")
+local JzsdXE = Izfrit:qGHWfp("JzsdXE")
+local HAbnRH = JzsdXE.HAbnRH
+local nXkLnG = URFOEb.YbSqfO
+local hIREGL = Izfrit:qGHWfp("hIREGL")
+
+-- DNKZwK
+local BzZHJc = false
+local aslfoA = false
+local LmBuYS = false
+local qyvNVO = 16
+local vhBMYc = 50
+local jkzIPQ = 100
+local YbRiTk = false
+local ZFoboJ = true
+local locPhd = {}
+local aMpFaB = {}
+local weZNlt = intqke.XicbKy(1, 0, 0)
+
+-- HvEidq NfKScz
+local Iiqxcr = AsBqLu:mVLkZW("HvEidq")
+local jytaoQ = Iiqxcr:ENTpSQ("QvoPxy")
+local PaJtHd = Iiqxcr:ENTpSQ("rUvHbL")
+local oOeczB = Iiqxcr:ENTpSQ("KhusmL")
+local fmmoeF = Iiqxcr:ENTpSQ("AhKuOV")
+
+-- QvoPxy xSaKCa MrTFJt mIOyLH
+jytaoQ:QXbQOu("QvoPxy xSaKCa", "xSaKCa UJmvXF MrTFJt iIOJJK", mryUSj.lYWxtL.vySGpc, function()
+    aslfoA = not aslfoA
+    if aslfoA then
+        wZFsAO.wlBPgp:JjSPUA(function()
+            if HAbnRH.EIwPcN and aslfoA then
+                HAbnRH.EIwPcN.NnkvYf.tUELNf = HAbnRH.EIwPcN.NnkvYf.tUELNf + HAbnRH.EIwPcN.HsAbQw.Fjqgln * (qyvNVO/50)
+            end
+        end)
+    end
+end)
+
+-- QvoPxy LFXnhr
+jytaoQ:JdJVsO("QvoPxy YWASWc", "XVCOVN UJmvXF jSzoky", 500, 16, function(jSzoky)
+    qyvNVO = jSzoky
+end)
+
+-- rUvHbL xSaKCa MrTFJt mIOyLH
+PaJtHd:QXbQOu("rUvHbL xSaKCa", "xSaKCa xtmJvo MrTFJt iIOJJK", mryUSj.lYWxtL.VSwHeS, function()
+    BzZHJc = not BzZHJc
+    if BzZHJc then
+        local tOnNnB = HAbnRH.EIwPcN
+        if tOnNnB then
+            local icqptw = tOnNnB:QdLfGi("HsAbQw")
+            local AwiiAw = tOnNnB:QdLfGi("NnkvYf")
+            
+            wZFsAO.amxatm:JjSPUA(function()
+                if BzZHJc then
+                    local BjfcTx = dTMVsY.XicbKy(0,0,0)
+                    if hIREGL:CbKgzj(mryUSj.lYWxtL.qDjXzr) then
+                        BjfcTx = BjfcTx + (nXkLnG.tUELNf.CPDcfs * vhBMYc)
+                    end
+                    if hIREGL:CbKgzj(mryUSj.lYWxtL.kunYeC) then
+                        BjfcTx = BjfcTx - (nXkLnG.tUELNf.CPDcfs * vhBMYc)
+                    end
+                    if hIREGL:CbKgzj(mryUSj.lYWxtL.uPxjhn) then
+                        BjfcTx = BjfcTx + (nXkLnG.tUELNf.LmJurJ * vhBMYc)
+                    end
+                    if hIREGL:CbKgzj(mryUSj.lYWxtL.vIbYai) then
+                        BjfcTx = BjfcTx - (nXkLnG.tUELNf.LmJurJ * vhBMYc)
+                    end
+                    if hIREGL:CbKgzj(mryUSj.lYWxtL.HBUUVf) then
+                        BjfcTx = BjfcTx + dTMVsY.XicbKy(0, vhBMYc, 0)
+                    end
+                    if hIREGL:CbKgzj(mryUSj.lYWxtL.LjLIMR) then
+                        BjfcTx = BjfcTx - dTMVsY.XicbKy(0, vhBMYc, 0)
+                    end
+                    AwiiAw.TJZtrf = BjfcTx
+                end
+            end)
+        end
+    end
+end)
+
+-- rUvHbL QvoPxy LFXnhr
+PaJtHd:JdJVsO("rUvHbL QvoPxy", "XVCOVN xtmJvo UJmvXF", 200, 1, function(jSzoky)
+    vhBMYc = jSzoky
+end)
+
+-- CWpPDw IuuAqm
+fmmoeF:QXbQOu("xSaKCa FXUSqv", "zcMIPv iFqkzA RbrXGd", mryUSj.lYWxtL.ygneZS, function()
+    LmBuYS = not LmBuYS
+    
+    wZFsAO:GQiGPN("FXUSqv", 100, function()
+        if LmBuYS and HAbnRH.EIwPcN then
+            for nRBUJL, XGKwRy in wfDeXX(HAbnRH.EIwPcN:dDgvnK()) do
+                if XGKwRy:NCtWPF("ctmCtz") then
+                    XGKwRy.Htgskc = false
+                end
+            end
+        end
+    end)
+end)
+
+-- CWpPDw SPCdcK AZegin (Cflwwo aFYkWU)
+local function EeUJpj()
+    if HAbnRH.EIwPcN then
+        local HsAbQw = HAbnRH.EIwPcN:QdLfGi("HsAbQw")
+        local WJEPqZ = HAbnRH.EIwPcN:QdLfGi("NnkvYf")
+        
+        -- qjFljz mQTWSY IXsTDH
+        HsAbQw.srLIOG:JjSPUA(function(nRBUJL, XicbKy)
+            if XicbKy == mryUSj.xIeXRY.RseEyo then
+                OiPGtL.IjdzwW()
+                HsAbQw.IkiFtH = HsAbQw.IkiFtH
+            end
+        end)
+        
+        -- Cflwwo nAOOEY pLYJTA
+        local IJpYOE = HsAbQw.IkiFtH
+        HsAbQw:WIxhuz("IkiFtH"):JjSPUA(function()
+            if HsAbQw.IkiFtH < IJpYOE then
+                local nAOOEY = WJEPqZ.TJZtrf
+                if nAOOEY.drVISF < -50 then
+                    HsAbQw.IkiFtH = IJpYOE
+                end
+            end
+            IJpYOE = HsAbQw.IkiFtH
+        end)
+    end
+end
+
+fmmoeF:CFYpZm("CWpPDw SPCdcK AZegin", "DWdskM mQTWSY MBUNpu RjdhdQ", function(OgHDml)
+    if OgHDml then
+        EeUJpj()
+    end
+end)
+
+-- KhusmL mIOyLH
+oOeczB:QXbQOu("KhusmL", "DypVVs GyGAsm JUdMvf", mryUSj.lYWxtL.pmbxKP, function()
+    if not YbRiTk and HAbnRH.EIwPcN then
+        YbRiTk = true
+        local WJEPqZ = HAbnRH.EIwPcN:hmbhpQ("NnkvYf")
+        if WJEPqZ then
+            local PQEMxv = RSnLIQ.XicbKy("GCTzLb")
+            PQEMxv.qpcXTc = dTMVsY.XicbKy(HvqzvQ.VaJdUz, HvqzvQ.VaJdUz, HvqzvQ.VaJdUz)
+            PQEMxv.TJZtrf = nXkLnG.tUELNf.CPDcfs * jkzIPQ
+            PQEMxv.QjtKSk = WJEPqZ
+            Izfrit:qGHWfp("onRSSa"):rLkqUS(PQEMxv, 0.2)
+            OiPGtL.IjdzwW(1)
+            YbRiTk = false
+        end
+    end
+end)
+
+-- KhusmL IJCKbQ LFXnhr
+oOeczB:JdJVsO("KhusmL IJCKbQ", "XVCOVN JUdMvf tEALOU", 500, 50, function(jSzoky)
+    jkzIPQ = jSzoky
+end)
+
+-- aSGUwM NfKScz
+local gANbXF = AsBqLu:mVLkZW("aSGUwM")
+local eWiIkP = gANbXF:ENTpSQ("MeYONH")
+
+-- ajDiOg pKMSVy MeYONH mdANXI
+local function NvYxLy(pZbCoM)
+    local YoSzbH = RSnLIQ.XicbKy("rWiNVd")
+    YoSzbH.pKMSVy = "locPhd"
+    YoSzbH.jNtYTC = EuCZVU.XicbKy(0, 200, 0, 50)
+    YoSzbH.ymrumb = true
+    YoSzbH.UDGSaR = dTMVsY.XicbKy(0, 2, 0)
+    
+    local yHEQtf = RSnLIQ.XicbKy("axWfPm")
+    yHEQtf.pKMSVy = "GEmbvA"
+    yHEQtf.JJXYlf = 1
+    yHEQtf.jNtYTC = EuCZVU.XicbKy(1, 0, 0, 20)
+    yHEQtf.yvqOPK = mryUSj.yvqOPK.mJWAWV
+    yHEQtf.slZZPv = intqke.XicbKy(1, 1, 1)
+    yHEQtf.RDfwpa = 14
+    yHEQtf.ehDdVJ = pZbCoM.pKMSVy
+    yHEQtf.QjtKSk = YoSzbH
+    
+    return YoSzbH
+end
+
+-- MeYONH tZbTFX mdANXI
+local function bXqQry()
+    while ZFoboJ do
+        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
+            if pZbCoM ~= HAbnRH then
+                if pZbCoM.EIwPcN and pZbCoM.EIwPcN:hmbhpQ("WwQOWO") then
+                    if locPhd[pZbCoM] then
+                        if not pZbCoM.EIwPcN.WwQOWO:hmbhpQ("locPhd") then
+                            local EMahWi = NvYxLy(pZbCoM)
+                            locPhd[pZbCoM] = EMahWi
+                            EMahWi.QjtKSk = pZbCoM.EIwPcN.WwQOWO
+                        end
+                    end
+                    
+                    if pZbCoM.EIwPcN:hmbhpQ("HsAbQw") then
+                        local ogwOZE = pZbCoM.EIwPcN:hmbhpQ("KyVLrN")
+                        if ogwOZE then
+                            local BOJrDN = pZbCoM.EIwPcN.HsAbQw.IkiFtH
+                            local zqRUQn = pZbCoM.EIwPcN.HsAbQw.AcIKFl
+                            local yJuxWO = BOJrDN/zqRUQn
+                            ogwOZE.PXhbwv = intqke.XicbKy(1-yJuxWO, yJuxWO, 0)
+                        end
+                    end
+                    
+                    if aMpFaB[pZbCoM] then
+                        if not pZbCoM.EIwPcN:hmbhpQ("AkfylE") then
+                            local ogwOZE = RSnLIQ.XicbKy("AkfylE")
+                            ogwOZE.YGoOiJ = 0.5
+                            ogwOZE.OMzxPS = 0
+                            ogwOZE.PXhbwv = weZNlt
+                            ogwOZE.NyWFqm = intqke.XicbKy(1, 1, 1)
+                            ogwOZE.QjtKSk = pZbCoM.EIwPcN
+                            aMpFaB[pZbCoM] = ogwOZE
+                        end
+                    end
+                end
+            end
+        end
+        OiPGtL.IjdzwW(0.1)
+    end
+end
+
+-- MeYONH xPUvLj
+eWiIkP:CFYpZm("pKMSVy MeYONH", "smUyoe pZbCoM LWDWTN", function(OgHDml)
+    if OgHDml then
+        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
+            if pZbCoM ~= HAbnRH and pZbCoM.EIwPcN then
+                local EMahWi = NvYxLy(pZbCoM)
+                locPhd[pZbCoM] = EMahWi
+                EMahWi.QjtKSk = pZbCoM.EIwPcN:QdLfGi("WwQOWO")
+            end
+        end
+    else
+        for nRBUJL, EMahWi in wfDeXX(locPhd) do
+            EMahWi:QNdyAZ()
+        end
+        locPhd = {}
+    end
+end)
+
+eWiIkP:CFYpZm("IkiFtH MeYONH", "smUyoe BOJrDN-zRjCql LNOoyT", function(OgHDml)
+    if OgHDml then
+        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
+            if pZbCoM ~= HAbnRH and pZbCoM.EIwPcN then
+                local ogwOZE = RSnLIQ.XicbKy("AkfylE")
+                ogwOZE.pKMSVy = "KyVLrN"
+                ogwOZE.QjtKSk = pZbCoM.EIwPcN
+            end
+        end
+    else
+        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
+            if pZbCoM.EIwPcN then
+                local ogwOZE = pZbCoM.EIwPcN:hmbhpQ("KyVLrN")
+                if ogwOZE then ogwOZE:QNdyAZ() end
+            end
+        end
+    end
+end)
+
+eWiIkP:YmownW("MeYONH GOvIcB", "hIKAzf zPuUTo MeYONH sSQino", intqke.XicbKy(1, 0, 0), function(sSQino)
+    weZNlt = sSQino
+    for nRBUJL, ogwOZE in wfDeXX(aMpFaB) do
+        ogwOZE.PXhbwv = sSQino
+    end
+end)
+
+eWiIkP:CFYpZm("OrkagD MeYONH", "smUyoe zPuUTo sSQino LNOoyT", function(OgHDml)
+    if OgHDml then
+        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
+            if pZbCoM ~= HAbnRH and pZbCoM.EIwPcN then
+                local ogwOZE = RSnLIQ.XicbKy("AkfylE")
+                ogwOZE.YGoOiJ = 0.5
+                ogwOZE.OMzxPS = 0
+                ogwOZE.PXhbwv = weZNlt
+                ogwOZE.NyWFqm = intqke.XicbKy(1, 1, 1)
+                ogwOZE.QjtKSk = pZbCoM.EIwPcN
+                aMpFaB[pZbCoM] = ogwOZE
+            end
+        end
+    else
+        for nRBUJL, ogwOZE in wfDeXX(aMpFaB) do
+            ogwOZE:QNdyAZ()
+        end
+        aMpFaB = {}
+    end
+end)
+
+eWiIkP:CFYpZm("uODfhX MeYONH wImGKg", "DWhfyL fMNLuM MeYONH aFcmZS", function(OgHDml)
+    ZFoboJ = not OgHDml
+    if ZFoboJ then
+        OiPGtL.QCdqEe(bXqQry)
+    end
+end)
+
+-- PWRYQs NfKScz
+local crsMHu = AsBqLu:mVLkZW("PWRYQs")
+local ZPtoCy = crsMHu:ENTpSQ("Kroxdt PWRYQs")
+
+ZPtoCy:ubeuGc("sFvxGg", "TzMldW YrVxOZ sFvxGg", {
+    "dHLnOr",
+    "pzkLqy", 
+    "WUUXLS",
+    "SWHGXk",
+    "iJssgq",
+    "zjOrJb",
+    "EOeHDk",
+    "RVLoBW"
+}, function(PjniOT)
+    rugjve:SoZyBP(PjniOT)
+end)
+
+ZPtoCy:QXbQOu("xSaKCa Kroxdt", "smUyoe/SiqDTR czyeYG Kroxdt", mryUSj.lYWxtL.ULVtlq, function()
+    rugjve:TjHlOQ()
+end)
+
+-- TFkEta MeYONH tZbTFX pENLLy
+OiPGtL.QCdqEe(bXqQry)
+
+-- qvyPBq GsgqkT
+JzsdXE.VFxhmd:JjSPUA(function(pZbCoM)
+    pZbCoM.TtKZtm:JjSPUA(function(pzsQUK)
+        if locPhd[pZbCoM] then
+            local EMahWi = NvYxLy(pZbCoM)
+            locPhd[pZbCoM] = EMahWi
+            EMahWi.QjtKSk = pzsQUK:QdLfGi("WwQOWO")
+        end
+    end)
+end)
+
+JzsdXE.gSulli:JjSPUA(function(pZbCoM)
+    if locPhd[pZbCoM] then
+        locPhd[pZbCoM]:QNdyAZ()
+        locPhd[pZbCoM] = nil
+    end
+    if aMpFaB[pZbCoM] then
+        aMpFaB[pZbCoM]:QNdyAZ()
+        aMpFaB[pZbCoM] = nil
+    end
+end)

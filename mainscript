@@ -51,7 +51,7 @@ SpeedSection:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X,
     end
 end)
 
-SpeedSection:NewSlider("Speed Value", "Adjust speed value", 500, 1, function(value)
+SpeedSection:NewSlider("Speed Value", "Adjust speed value", 200, 1, function(value)
     TargetSpeed = value
 end, 1)
 
@@ -92,7 +92,7 @@ FlightSection:NewKeybind("Flight Toggle", "Toggle flight with key", Enum.KeyCode
     end
 end)
 
-FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 500, 1, function(value)
+FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 200, 1, function(value)
     FlightSpeed = value
 end)
 

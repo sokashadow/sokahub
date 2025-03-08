@@ -1,307 +1,307 @@
-local cZBmBY = jvzorC(bAmdUf:VMMGYY("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local jxCLMq = cZBmBY.eTYdYH("Soka Hub", "DarkTheme")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Soka Hub", "DarkTheme")
 
--- ORQivx
-local feWqlF = bAmdUf:mBZKtY("RunService")
-local AkqBRJ = bAmdUf:mBZKtY("Players")
-local GRQXtQ = AkqBRJ.GRQXtQ
-local qAbWfg = uRtunc.lKrsPy
-local wBrFAe = bAmdUf:mBZKtY("UserInputService")
+-- Services
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+local UserInputService = game:GetService("UserInputService")
 
--- WwIZxE
-local ycWOiz = false
-local OXskcQ = false
-local QwPKFy = false
-local AbFfRq = 16
-local NSBffP = 50
-local TPhyRD = 100
-local fayRXy = false
-local KgITlK = true
-local KDUuLa = {}
-local xvcyny = {}
-local JSyPXV = NbgoZs.fxiKuy(1, 0, 0)
+-- States
+local FlightEnabled = false
+local SpeedEnabled = false
+local NoClipEnabled = false
+local TargetSpeed = 16
+local FlightSpeed = 50
+local DashSpeed = 100
+local DashCooldown = false
+local RunESPUpdate = true
+local NameESP = {}
+local CustomHighlights = {}
+local CustomESPColor = Color3.new(1, 0, 0)
 
--- jfRWLp RFeGgB
-local PlHUbD = jxCLMq:KqHHij("Main")
-local nPLRxO = PlHUbD:TzhOci("Speed")
-local oYXter = PlHUbD:TzhOci("Flight")
-local JauEoP = PlHUbD:TzhOci("Dash")
-local TPonoK = PlHUbD:TzhOci("Misc")
+-- Main Tab
+local MainTab = Window:NewTab("Main")
+local SpeedSection = MainTab:NewSection("Speed")
+local FlightSection = MainTab:NewSection("Flight")
+local DashSection = MainTab:NewSection("Dash")
+local MiscSection = MainTab:NewSection("Misc")
 
--- htVfFd zBEAmt HLKHTT CuTZDn
-nPLRxO:Wmomzf("Speed Toggle", "Toggle speed with key", vLWpYP.EyWlod.RzOibO, function()
-    OXskcQ = not OXskcQ
-    if OXskcQ then
-        feWqlF.xBUFSM:LhxEJh(function()
-            if GRQXtQ.uCXtJl and OXskcQ then
-                GRQXtQ.uCXtJl.YwvcYo.SfJcTZ = GRQXtQ.uCXtJl.YwvcYo.SfJcTZ + GRQXtQ.uCXtJl.JidvUJ.IsUhOn * (AbFfRq/50)
+-- Speed Toggle with Keybind
+SpeedSection:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X, function()
+    SpeedEnabled = not SpeedEnabled
+    if SpeedEnabled then
+        RunService.Heartbeat:Connect(function()
+            if LocalPlayer.Character and SpeedEnabled then
+                LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + LocalPlayer.Character.Humanoid.MoveDirection * (TargetSpeed/50)
             end
         end)
     end
 end)
 
--- htVfFd dlpIRm
-nPLRxO:ioRlLE("Speed Value", "Adjust speed value", 500, 16, function(hrtmfp)
-    AbFfRq = hrtmfp
+-- Speed Slider
+SpeedSection:NewSlider("Speed Value", "Adjust speed value", 500, 16, function(value)
+    TargetSpeed = value
 end)
 
--- uPmdxN zBEAmt HLKHTT CuTZDn
-oYXter:Wmomzf("Flight Toggle", "Toggle flight with key", vLWpYP.EyWlod.PXxQuM, function()
-    ycWOiz = not ycWOiz
-    if ycWOiz then
-        local cSBNnD = GRQXtQ.uCXtJl
-        if cSBNnD then
-            local eosnmn = cSBNnD:LtJdDD("Humanoid")
-            local XAwRWP = cSBNnD:LtJdDD("HumanoidRootPart")
+-- Flight Toggle with Keybind
+FlightSection:NewKeybind("Flight Toggle", "Toggle flight with key", Enum.KeyCode.F, function()
+    FlightEnabled = not FlightEnabled
+    if FlightEnabled then
+        local char = LocalPlayer.Character
+        if char then
+            local humanoid = char:WaitForChild("Humanoid")
+            local hrp = char:WaitForChild("HumanoidRootPart")
             
-            feWqlF.xJMtDz:LhxEJh(function()
-                if ycWOiz then
-                    local dLGlbH = wBounM.fxiKuy(0,0,0)
-                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.LILZFk) then
-                        dLGlbH = dLGlbH + (qAbWfg.SfJcTZ.pYKdAa * NSBffP)
+            RunService.RenderStepped:Connect(function()
+                if FlightEnabled then
+                    local newVel = Vector3.new(0,0,0)
+                    if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+                        newVel = newVel + (Camera.CFrame.LookVector * FlightSpeed)
                     end
-                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.UbIDmp) then
-                        dLGlbH = dLGlbH - (qAbWfg.SfJcTZ.pYKdAa * NSBffP)
+                    if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+                        newVel = newVel - (Camera.CFrame.LookVector * FlightSpeed)
                     end
-                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.WhaRat) then
-                        dLGlbH = dLGlbH + (qAbWfg.SfJcTZ.zMnMBa * NSBffP)
+                    if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+                        newVel = newVel + (Camera.CFrame.RightVector * FlightSpeed)
                     end
-                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.cQIArT) then
-                        dLGlbH = dLGlbH - (qAbWfg.SfJcTZ.zMnMBa * NSBffP)
+                    if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+                        newVel = newVel - (Camera.CFrame.RightVector * FlightSpeed)
                     end
-                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.DjoHsf) then
-                        dLGlbH = dLGlbH + wBounM.fxiKuy(0, NSBffP, 0)
+                    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+                        newVel = newVel + Vector3.new(0, FlightSpeed, 0)
                     end
-                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.ZCZxmU) then
-                        dLGlbH = dLGlbH - wBounM.fxiKuy(0, NSBffP, 0)
+                    if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+                        newVel = newVel - Vector3.new(0, FlightSpeed, 0)
                     end
-                    XAwRWP.cuSykD = dLGlbH
+                    hrp.Velocity = newVel
                 end
             end)
         end
     end
 end)
 
--- uPmdxN htVfFd dlpIRm
-oYXter:ioRlLE("Flight Speed", "Adjust flight speed", 200, 1, function(hrtmfp)
-    NSBffP = hrtmfp
+-- Flight Speed Slider
+FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 200, 1, function(value)
+    FlightSpeed = value
 end)
 
--- kOhszm EtmDdg
-TPonoK:Wmomzf("Toggle NoClip", "Phase through objects", vLWpYP.EyWlod.MqxnSA, function()
-    QwPKFy = not QwPKFy
+-- No Clip
+MiscSection:NewKeybind("Toggle NoClip", "Phase through objects", Enum.KeyCode.V, function()
+    NoClipEnabled = not NoClipEnabled
     
-    feWqlF:NxBxqX("NoClip", 100, function()
-        if QwPKFy and GRQXtQ.uCXtJl then
-            for cdpabP, btKXeK in deHlgJ(GRQXtQ.uCXtJl:xoAYHH()) do
-                if btKXeK:FiPOIf("BasePart") then
-                    btKXeK.MRqCcW = false
+    RunService:BindToRenderStep("NoClip", 100, function()
+        if NoClipEnabled and LocalPlayer.Character then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
                 end
             end
         end
     end)
 end)
 
--- kOhszm MFbeNI tXwrnn (uOJsuJ LhxyOY)
-local function liStms()
-    if GRQXtQ.uCXtJl then
-        local JidvUJ = GRQXtQ.uCXtJl:LtJdDD("Humanoid")
-        local pkHhVF = GRQXtQ.uCXtJl:LtJdDD("HumanoidRootPart")
+-- No Fall Damage (Smooth Version)
+local function SmoothNoFallDamage()
+    if LocalPlayer.Character then
+        local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
+        local HRP = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
         
-        -- LRacia LiJveP znEneQ
-        JidvUJ.TimYKf:LhxEJh(function(cdpabP, fxiKuy)
-            if fxiKuy == vLWpYP.BrsUSo.wjgYpN then
-                RGcUyS.GYDNpC()
-                JidvUJ.hAsdpm = JidvUJ.hAsdpm
+        -- Clean fall detection
+        Humanoid.StateChanged:Connect(function(_, new)
+            if new == Enum.HumanoidStateType.Landed then
+                task.wait()
+                Humanoid.Health = Humanoid.Health
             end
         end)
         
-        -- uOJsuJ DbJepo GkANhD
-        local UehcoJ = JidvUJ.hAsdpm
-        JidvUJ:FGbWXa("Health"):LhxEJh(function()
-            if JidvUJ.hAsdpm < UehcoJ then
-                local DbJepo = pkHhVF.cuSykD
-                if DbJepo.uSOldU < -50 then
-                    JidvUJ.hAsdpm = UehcoJ
+        -- Smooth velocity handling
+        local lastHealth = Humanoid.Health
+        Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+            if Humanoid.Health < lastHealth then
+                local velocity = HRP.Velocity
+                if velocity.Y < -50 then
+                    Humanoid.Health = lastHealth
                 end
             end
-            UehcoJ = JidvUJ.hAsdpm
+            lastHealth = Humanoid.Health
         end)
     end
 end
 
-TPonoK:bNPXpQ("No Fall Damage", "Prevents fall damage smoothly", function(ijBEaF)
-    if ijBEaF then
-        liStms()
+MiscSection:NewToggle("No Fall Damage", "Prevents fall damage smoothly", function(state)
+    if state then
+        SmoothNoFallDamage()
     end
 end)
 
--- edfRTl CuTZDn
-JauEoP:Wmomzf("Dash", "Press to dash", vLWpYP.EyWlod.aYBzyy, function()
-    if not fayRXy and GRQXtQ.uCXtJl then
-        fayRXy = true
-        local pkHhVF = GRQXtQ.uCXtJl:UpDbFJ("HumanoidRootPart")
-        if pkHhVF then
-            local KNJCRA = NcmjOK.fxiKuy("BodyVelocity")
-            KNJCRA.fMAXkT = wBounM.fxiKuy(Ocbasg.OVeDCy, Ocbasg.OVeDCy, Ocbasg.OVeDCy)
-            KNJCRA.cuSykD = qAbWfg.SfJcTZ.pYKdAa * TPhyRD
-            KNJCRA.FUjjsR = pkHhVF
-            bAmdUf:mBZKtY("Debris"):XDPIdi(KNJCRA, 0.2)
-            RGcUyS.GYDNpC(1)
-            fayRXy = false
+-- Dash Keybind
+DashSection:NewKeybind("Dash", "Press to dash", Enum.KeyCode.Q, function()
+    if not DashCooldown and LocalPlayer.Character then
+        DashCooldown = true
+        local HRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if HRP then
+            local BV = Instance.new("BodyVelocity")
+            BV.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            BV.Velocity = Camera.CFrame.LookVector * DashSpeed
+            BV.Parent = HRP
+            game:GetService("Debris"):AddItem(BV, 0.2)
+            task.wait(1)
+            DashCooldown = false
         end
     end
 end)
 
--- edfRTl PNmtAK dlpIRm
-JauEoP:ioRlLE("Dash Force", "Adjust dash force", 500, 50, function(hrtmfp)
-    TPhyRD = hrtmfp
+-- Dash Force Slider
+DashSection:NewSlider("Dash Force", "Adjust dash force", 500, 50, function(value)
+    DashSpeed = value
 end)
 
--- dzdBPG RFeGgB
-local YBTiZE = jxCLMq:KqHHij("Visual")
-local zEkBUE = YBTiZE:TzhOci("ESP")
+-- Visual Tab
+local VisualTab = Window:NewTab("Visual")
+local ESPSection = VisualTab:NewSection("ESP")
 
--- mlQqxn eiUagV rJEdhJ jTGvnP
-local function FRHtrV(olEOEK)
-    local jkpZez = NcmjOK.fxiKuy("BillboardGui")
-    jkpZez.eiUagV = "NameESP"
-    jkpZez.cnTNeq = ThFKMa.fxiKuy(0, 200, 0, 50)
-    jkpZez.RlaqIZ = true
-    jkpZez.qGvyRk = wBounM.fxiKuy(0, 2, 0)
+-- Create Name ESP Function
+local function CreateNameESP(player)
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "NameESP"
+    billboard.Size = UDim2.new(0, 200, 0, 50)
+    billboard.AlwaysOnTop = true
+    billboard.StudsOffset = Vector3.new(0, 2, 0)
     
-    local cEhBpu = NcmjOK.fxiKuy("TextLabel")
-    cEhBpu.eiUagV = "PlayerName"
-    cEhBpu.rRROAI = 1
-    cEhBpu.cnTNeq = ThFKMa.fxiKuy(1, 0, 0, 20)
-    cEhBpu.iMlfjU = vLWpYP.iMlfjU.IndmjN
-    cEhBpu.GgaKiV = NbgoZs.fxiKuy(1, 1, 1)
-    cEhBpu.qoOBsE = 14
-    cEhBpu.wLEHna = olEOEK.eiUagV
-    cEhBpu.FUjjsR = jkpZez
+    local name = Instance.new("TextLabel")
+    name.Name = "PlayerName"
+    name.BackgroundTransparency = 1
+    name.Size = UDim2.new(1, 0, 0, 20)
+    name.Font = Enum.Font.SourceSansBold
+    name.TextColor3 = Color3.new(1, 1, 1)
+    name.TextSize = 14
+    name.Text = player.Name
+    name.Parent = billboard
     
-    return jkpZez
+    return billboard
 end
 
--- rJEdhJ qPQjhl jTGvnP
-local function fgDSnA()
-    while KgITlK do
-        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
-            if olEOEK ~= GRQXtQ then
-                if olEOEK.uCXtJl and olEOEK.uCXtJl:UpDbFJ("Head") then
-                    if KDUuLa[olEOEK] then
-                        if not olEOEK.uCXtJl.CBESya:UpDbFJ("NameESP") then
-                            local zaVeOu = FRHtrV(olEOEK)
-                            KDUuLa[olEOEK] = zaVeOu
-                            zaVeOu.FUjjsR = olEOEK.uCXtJl.CBESya
+-- ESP Update Function
+local function UpdateAllESP()
+    while RunESPUpdate do
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+                if player.Character and player.Character:FindFirstChild("Head") then
+                    if NameESP[player] then
+                        if not player.Character.Head:FindFirstChild("NameESP") then
+                            local esp = CreateNameESP(player)
+                            NameESP[player] = esp
+                            esp.Parent = player.Character.Head
                         end
                     end
                     
-                    if olEOEK.uCXtJl:UpDbFJ("Humanoid") then
-                        local BIDtuN = olEOEK.uCXtJl:UpDbFJ("ESP_Highlight")
-                        if BIDtuN then
-                            local qYnDvR = olEOEK.uCXtJl.JidvUJ.hAsdpm
-                            local EgLZdn = olEOEK.uCXtJl.JidvUJ.OzKAxQ
-                            local ARpeIJ = qYnDvR/EgLZdn
-                            BIDtuN.OiOFqC = NbgoZs.fxiKuy(1-ARpeIJ, ARpeIJ, 0)
+                    if player.Character:FindFirstChild("Humanoid") then
+                        local highlight = player.Character:FindFirstChild("ESP_Highlight")
+                        if highlight then
+                            local health = player.Character.Humanoid.Health
+                            local maxHealth = player.Character.Humanoid.MaxHealth
+                            local healthPercent = health/maxHealth
+                            highlight.FillColor = Color3.new(1-healthPercent, healthPercent, 0)
                         end
                     end
                     
-                    if xvcyny[olEOEK] then
-                        if not olEOEK.uCXtJl:UpDbFJ("Highlight") then
-                            local BIDtuN = NcmjOK.fxiKuy("Highlight")
-                            BIDtuN.QvdTwE = 0.5
-                            BIDtuN.EUVrpD = 0
-                            BIDtuN.OiOFqC = JSyPXV
-                            BIDtuN.AppHIp = NbgoZs.fxiKuy(1, 1, 1)
-                            BIDtuN.FUjjsR = olEOEK.uCXtJl
-                            xvcyny[olEOEK] = BIDtuN
+                    if CustomHighlights[player] then
+                        if not player.Character:FindFirstChild("Highlight") then
+                            local highlight = Instance.new("Highlight")
+                            highlight.FillTransparency = 0.5
+                            highlight.OutlineTransparency = 0
+                            highlight.FillColor = CustomESPColor
+                            highlight.OutlineColor = Color3.new(1, 1, 1)
+                            highlight.Parent = player.Character
+                            CustomHighlights[player] = highlight
                         end
                     end
                 end
             end
         end
-        RGcUyS.GYDNpC(0.1)
+        task.wait(0.1)
     end
 end
 
--- rJEdhJ GYYTsR
-zEkBUE:bNPXpQ("Name ESP", "Shows player names", function(ijBEaF)
-    if ijBEaF then
-        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
-            if olEOEK ~= GRQXtQ and olEOEK.uCXtJl then
-                local zaVeOu = FRHtrV(olEOEK)
-                KDUuLa[olEOEK] = zaVeOu
-                zaVeOu.FUjjsR = olEOEK.uCXtJl:LtJdDD("Head")
+-- ESP Toggles
+ESPSection:NewToggle("Name ESP", "Shows player names", function(state)
+    if state then
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character then
+                local esp = CreateNameESP(player)
+                NameESP[player] = esp
+                esp.Parent = player.Character:WaitForChild("Head")
             end
         end
     else
-        for cdpabP, zaVeOu in deHlgJ(KDUuLa) do
-            zaVeOu:ILxsTb()
+        for _, esp in pairs(NameESP) do
+            esp:Destroy()
         end
-        KDUuLa = {}
+        NameESP = {}
     end
 end)
 
-zEkBUE:bNPXpQ("Health ESP", "Shows health-based highlights", function(ijBEaF)
-    if ijBEaF then
-        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
-            if olEOEK ~= GRQXtQ and olEOEK.uCXtJl then
-                local BIDtuN = NcmjOK.fxiKuy("Highlight")
-                BIDtuN.eiUagV = "ESP_Highlight"
-                BIDtuN.FUjjsR = olEOEK.uCXtJl
+ESPSection:NewToggle("Health ESP", "Shows health-based highlights", function(state)
+    if state then
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "ESP_Highlight"
+                highlight.Parent = player.Character
             end
         end
     else
-        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
-            if olEOEK.uCXtJl then
-                local BIDtuN = olEOEK.uCXtJl:UpDbFJ("ESP_Highlight")
-                if BIDtuN then BIDtuN:ILxsTb() end
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player.Character then
+                local highlight = player.Character:FindFirstChild("ESP_Highlight")
+                if highlight then highlight:Destroy() end
             end
         end
     end
 end)
 
-zEkBUE:hZYcrp("ESP Color", "Pick custom ESP color", NbgoZs.fxiKuy(1, 0, 0), function(pseEXG)
-    JSyPXV = pseEXG
-    for cdpabP, BIDtuN in deHlgJ(xvcyny) do
-        BIDtuN.OiOFqC = pseEXG
+ESPSection:NewColorPicker("ESP Color", "Pick custom ESP color", Color3.new(1, 0, 0), function(color)
+    CustomESPColor = color
+    for _, highlight in pairs(CustomHighlights) do
+        highlight.FillColor = color
     end
 end)
 
-zEkBUE:bNPXpQ("Custom ESP", "Shows custom color highlights", function(ijBEaF)
-    if ijBEaF then
-        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
-            if olEOEK ~= GRQXtQ and olEOEK.uCXtJl then
-                local BIDtuN = NcmjOK.fxiKuy("Highlight")
-                BIDtuN.QvdTwE = 0.5
-                BIDtuN.EUVrpD = 0
-                BIDtuN.OiOFqC = JSyPXV
-                BIDtuN.AppHIp = NbgoZs.fxiKuy(1, 1, 1)
-                BIDtuN.FUjjsR = olEOEK.uCXtJl
-                xvcyny[olEOEK] = BIDtuN
+ESPSection:NewToggle("Custom ESP", "Shows custom color highlights", function(state)
+    if state then
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character then
+                local highlight = Instance.new("Highlight")
+                highlight.FillTransparency = 0.5
+                highlight.OutlineTransparency = 0
+                highlight.FillColor = CustomESPColor
+                highlight.OutlineColor = Color3.new(1, 1, 1)
+                highlight.Parent = player.Character
+                CustomHighlights[player] = highlight
             end
         end
     else
-        for cdpabP, BIDtuN in deHlgJ(xvcyny) do
-            BIDtuN:ILxsTb()
+        for _, highlight in pairs(CustomHighlights) do
+            highlight:Destroy()
         end
-        xvcyny = {}
+        CustomHighlights = {}
     end
 end)
 
-zEkBUE:bNPXpQ("Stop ESP Updates", "Stops all ESP updates", function(ijBEaF)
-    KgITlK = not ijBEaF
-    if KgITlK then
-        RGcUyS.rTMqJh(fgDSnA)
+ESPSection:NewToggle("Stop ESP Updates", "Stops all ESP updates", function(state)
+    RunESPUpdate = not state
+    if RunESPUpdate then
+        task.spawn(UpdateAllESP)
     end
 end)
 
--- JRtAxJ RFeGgB
-local olCTmy = jxCLMq:KqHHij("Settings")
-local eMMNLu = olCTmy:TzhOci("GUI Settings")
+-- Settings Tab
+local SettingsTab = Window:NewTab("Settings")
+local SettingsSection = SettingsTab:NewSection("GUI Settings")
 
-eMMNLu:EkYqbb("Theme", "Change UI Theme", {
+SettingsSection:NewDropdown("Theme", "Change UI Theme", {
     "DarkTheme",
     "LightTheme", 
     "BloodTheme",
@@ -310,37 +310,35 @@ eMMNLu:EkYqbb("Theme", "Change UI Theme", {
     "Midnight",
     "Sentinel",
     "Synapse"
-}, function(JXGeRb)
-    cZBmBY:bgRYxd(JXGeRb)
+}, function(currentTheme)
+    Library:ChangeTheme(currentTheme)
 end)
 
-eMMNLu:Wmomzf("Toggle GUI", "Shows/Hides the GUI", vLWpYP.EyWlod.yQiujk, function()
-    cZBmBY:PBHKiT()
+SettingsSection:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode.RightShift, function()
+    Library:ToggleUI()
 end)
 
--- FKlkPj rJEdhJ qPQjhl UegsbF
-RGcUyS.rTMqJh(fgDSnA)
+-- Start ESP Update Loop
+task.spawn(UpdateAllESP)
 
--- dgyxog kLTnDc
-AkqBRJ.smVIBQ:LhxEJh(function(olEOEK)
-    olEOEK.wyfltI:LhxEJh(function(gsbJRU)
-        if KDUuLa[olEOEK] then
-            local zaVeOu = FRHtrV(olEOEK)
-            KDUuLa[olEOEK] = zaVeOu
-            zaVeOu.FUjjsR = gsbJRU:LtJdDD("Head")
+-- Player Handling
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        if NameESP[player] then
+            local esp = CreateNameESP(player)
+            NameESP[player] = esp
+            esp.Parent = character:WaitForChild("Head")
         end
     end)
 end)
 
-AkqBRJ.UnocYN:LhxEJh(function(olEOEK)
-    if KDUuLa[olEOEK] then
-        KDUuLa[olEOEK]:ILxsTb()
-        KDUuLa[olEOEK] = nil
+Players.PlayerRemoving:Connect(function(player)
+    if NameESP[player] then
+        NameESP[player]:Destroy()
+        NameESP[player] = nil
     end
-    if xvcyny[olEOEK] then
-        xvcyny[olEOEK]:ILxsTb()
-        xvcyny[olEOEK] = nil
+    if CustomHighlights[player] then
+        CustomHighlights[player]:Destroy()
+        CustomHighlights[player] = nil
     end
 end)
-
-

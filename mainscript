@@ -1,344 +1,346 @@
-local rugjve = bLKAXE(Izfrit:lVGnCY("iBzSOv://FLFaqO.eWEHrr.sxilue/OeUhnz/kBzJqN-YrVxOZ-rugjve/TyhPyD/zLGyai.VcluGg"))()
-local AsBqLu = rugjve.hzLGpv("TbHAVO XCcuzk", "dHLnOr")
+local cZBmBY = jvzorC(bAmdUf:VMMGYY("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local jxCLMq = cZBmBY.eTYdYH("Soka Hub", "DarkTheme")
 
--- FDdNrI
-local wZFsAO = Izfrit:qGHWfp("wZFsAO")
-local JzsdXE = Izfrit:qGHWfp("JzsdXE")
-local HAbnRH = JzsdXE.HAbnRH
-local nXkLnG = URFOEb.YbSqfO
-local hIREGL = Izfrit:qGHWfp("hIREGL")
+-- ORQivx
+local feWqlF = bAmdUf:mBZKtY("RunService")
+local AkqBRJ = bAmdUf:mBZKtY("Players")
+local GRQXtQ = AkqBRJ.GRQXtQ
+local qAbWfg = uRtunc.lKrsPy
+local wBrFAe = bAmdUf:mBZKtY("UserInputService")
 
--- DNKZwK
-local BzZHJc = false
-local aslfoA = false
-local LmBuYS = false
-local qyvNVO = 16
-local vhBMYc = 50
-local jkzIPQ = 100
-local YbRiTk = false
-local ZFoboJ = true
-local locPhd = {}
-local aMpFaB = {}
-local weZNlt = intqke.XicbKy(1, 0, 0)
+-- WwIZxE
+local ycWOiz = false
+local OXskcQ = false
+local QwPKFy = false
+local AbFfRq = 16
+local NSBffP = 50
+local TPhyRD = 100
+local fayRXy = false
+local KgITlK = true
+local KDUuLa = {}
+local xvcyny = {}
+local JSyPXV = NbgoZs.fxiKuy(1, 0, 0)
 
--- HvEidq NfKScz
-local Iiqxcr = AsBqLu:mVLkZW("HvEidq")
-local jytaoQ = Iiqxcr:ENTpSQ("QvoPxy")
-local PaJtHd = Iiqxcr:ENTpSQ("rUvHbL")
-local oOeczB = Iiqxcr:ENTpSQ("KhusmL")
-local fmmoeF = Iiqxcr:ENTpSQ("AhKuOV")
+-- jfRWLp RFeGgB
+local PlHUbD = jxCLMq:KqHHij("Main")
+local nPLRxO = PlHUbD:TzhOci("Speed")
+local oYXter = PlHUbD:TzhOci("Flight")
+local JauEoP = PlHUbD:TzhOci("Dash")
+local TPonoK = PlHUbD:TzhOci("Misc")
 
--- QvoPxy xSaKCa MrTFJt mIOyLH
-jytaoQ:QXbQOu("QvoPxy xSaKCa", "xSaKCa UJmvXF MrTFJt iIOJJK", mryUSj.lYWxtL.vySGpc, function()
-    aslfoA = not aslfoA
-    if aslfoA then
-        wZFsAO.wlBPgp:JjSPUA(function()
-            if HAbnRH.EIwPcN and aslfoA then
-                HAbnRH.EIwPcN.NnkvYf.tUELNf = HAbnRH.EIwPcN.NnkvYf.tUELNf + HAbnRH.EIwPcN.HsAbQw.Fjqgln * (qyvNVO/50)
+-- htVfFd zBEAmt HLKHTT CuTZDn
+nPLRxO:Wmomzf("Speed Toggle", "Toggle speed with key", vLWpYP.EyWlod.RzOibO, function()
+    OXskcQ = not OXskcQ
+    if OXskcQ then
+        feWqlF.xBUFSM:LhxEJh(function()
+            if GRQXtQ.uCXtJl and OXskcQ then
+                GRQXtQ.uCXtJl.YwvcYo.SfJcTZ = GRQXtQ.uCXtJl.YwvcYo.SfJcTZ + GRQXtQ.uCXtJl.JidvUJ.IsUhOn * (AbFfRq/50)
             end
         end)
     end
 end)
 
--- QvoPxy LFXnhr
-jytaoQ:JdJVsO("QvoPxy YWASWc", "XVCOVN UJmvXF jSzoky", 500, 16, function(jSzoky)
-    qyvNVO = jSzoky
+-- htVfFd dlpIRm
+nPLRxO:ioRlLE("Speed Value", "Adjust speed value", 500, 16, function(hrtmfp)
+    AbFfRq = hrtmfp
 end)
 
--- rUvHbL xSaKCa MrTFJt mIOyLH
-PaJtHd:QXbQOu("rUvHbL xSaKCa", "xSaKCa xtmJvo MrTFJt iIOJJK", mryUSj.lYWxtL.VSwHeS, function()
-    BzZHJc = not BzZHJc
-    if BzZHJc then
-        local tOnNnB = HAbnRH.EIwPcN
-        if tOnNnB then
-            local icqptw = tOnNnB:QdLfGi("HsAbQw")
-            local AwiiAw = tOnNnB:QdLfGi("NnkvYf")
+-- uPmdxN zBEAmt HLKHTT CuTZDn
+oYXter:Wmomzf("Flight Toggle", "Toggle flight with key", vLWpYP.EyWlod.PXxQuM, function()
+    ycWOiz = not ycWOiz
+    if ycWOiz then
+        local cSBNnD = GRQXtQ.uCXtJl
+        if cSBNnD then
+            local eosnmn = cSBNnD:LtJdDD("Humanoid")
+            local XAwRWP = cSBNnD:LtJdDD("HumanoidRootPart")
             
-            wZFsAO.amxatm:JjSPUA(function()
-                if BzZHJc then
-                    local BjfcTx = dTMVsY.XicbKy(0,0,0)
-                    if hIREGL:CbKgzj(mryUSj.lYWxtL.qDjXzr) then
-                        BjfcTx = BjfcTx + (nXkLnG.tUELNf.CPDcfs * vhBMYc)
+            feWqlF.xJMtDz:LhxEJh(function()
+                if ycWOiz then
+                    local dLGlbH = wBounM.fxiKuy(0,0,0)
+                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.LILZFk) then
+                        dLGlbH = dLGlbH + (qAbWfg.SfJcTZ.pYKdAa * NSBffP)
                     end
-                    if hIREGL:CbKgzj(mryUSj.lYWxtL.kunYeC) then
-                        BjfcTx = BjfcTx - (nXkLnG.tUELNf.CPDcfs * vhBMYc)
+                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.UbIDmp) then
+                        dLGlbH = dLGlbH - (qAbWfg.SfJcTZ.pYKdAa * NSBffP)
                     end
-                    if hIREGL:CbKgzj(mryUSj.lYWxtL.uPxjhn) then
-                        BjfcTx = BjfcTx + (nXkLnG.tUELNf.LmJurJ * vhBMYc)
+                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.WhaRat) then
+                        dLGlbH = dLGlbH + (qAbWfg.SfJcTZ.zMnMBa * NSBffP)
                     end
-                    if hIREGL:CbKgzj(mryUSj.lYWxtL.vIbYai) then
-                        BjfcTx = BjfcTx - (nXkLnG.tUELNf.LmJurJ * vhBMYc)
+                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.cQIArT) then
+                        dLGlbH = dLGlbH - (qAbWfg.SfJcTZ.zMnMBa * NSBffP)
                     end
-                    if hIREGL:CbKgzj(mryUSj.lYWxtL.HBUUVf) then
-                        BjfcTx = BjfcTx + dTMVsY.XicbKy(0, vhBMYc, 0)
+                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.DjoHsf) then
+                        dLGlbH = dLGlbH + wBounM.fxiKuy(0, NSBffP, 0)
                     end
-                    if hIREGL:CbKgzj(mryUSj.lYWxtL.LjLIMR) then
-                        BjfcTx = BjfcTx - dTMVsY.XicbKy(0, vhBMYc, 0)
+                    if wBrFAe:WnqlPb(vLWpYP.EyWlod.ZCZxmU) then
+                        dLGlbH = dLGlbH - wBounM.fxiKuy(0, NSBffP, 0)
                     end
-                    AwiiAw.TJZtrf = BjfcTx
+                    XAwRWP.cuSykD = dLGlbH
                 end
             end)
         end
     end
 end)
 
--- rUvHbL QvoPxy LFXnhr
-PaJtHd:JdJVsO("rUvHbL QvoPxy", "XVCOVN xtmJvo UJmvXF", 200, 1, function(jSzoky)
-    vhBMYc = jSzoky
+-- uPmdxN htVfFd dlpIRm
+oYXter:ioRlLE("Flight Speed", "Adjust flight speed", 200, 1, function(hrtmfp)
+    NSBffP = hrtmfp
 end)
 
--- CWpPDw IuuAqm
-fmmoeF:QXbQOu("xSaKCa FXUSqv", "zcMIPv iFqkzA RbrXGd", mryUSj.lYWxtL.ygneZS, function()
-    LmBuYS = not LmBuYS
+-- kOhszm EtmDdg
+TPonoK:Wmomzf("Toggle NoClip", "Phase through objects", vLWpYP.EyWlod.MqxnSA, function()
+    QwPKFy = not QwPKFy
     
-    wZFsAO:GQiGPN("FXUSqv", 100, function()
-        if LmBuYS and HAbnRH.EIwPcN then
-            for nRBUJL, XGKwRy in wfDeXX(HAbnRH.EIwPcN:dDgvnK()) do
-                if XGKwRy:NCtWPF("ctmCtz") then
-                    XGKwRy.Htgskc = false
+    feWqlF:NxBxqX("NoClip", 100, function()
+        if QwPKFy and GRQXtQ.uCXtJl then
+            for cdpabP, btKXeK in deHlgJ(GRQXtQ.uCXtJl:xoAYHH()) do
+                if btKXeK:FiPOIf("BasePart") then
+                    btKXeK.MRqCcW = false
                 end
             end
         end
     end)
 end)
 
--- CWpPDw SPCdcK AZegin (Cflwwo aFYkWU)
-local function EeUJpj()
-    if HAbnRH.EIwPcN then
-        local HsAbQw = HAbnRH.EIwPcN:QdLfGi("HsAbQw")
-        local WJEPqZ = HAbnRH.EIwPcN:QdLfGi("NnkvYf")
+-- kOhszm MFbeNI tXwrnn (uOJsuJ LhxyOY)
+local function liStms()
+    if GRQXtQ.uCXtJl then
+        local JidvUJ = GRQXtQ.uCXtJl:LtJdDD("Humanoid")
+        local pkHhVF = GRQXtQ.uCXtJl:LtJdDD("HumanoidRootPart")
         
-        -- qjFljz mQTWSY IXsTDH
-        HsAbQw.srLIOG:JjSPUA(function(nRBUJL, XicbKy)
-            if XicbKy == mryUSj.xIeXRY.RseEyo then
-                OiPGtL.IjdzwW()
-                HsAbQw.IkiFtH = HsAbQw.IkiFtH
+        -- LRacia LiJveP znEneQ
+        JidvUJ.TimYKf:LhxEJh(function(cdpabP, fxiKuy)
+            if fxiKuy == vLWpYP.BrsUSo.wjgYpN then
+                RGcUyS.GYDNpC()
+                JidvUJ.hAsdpm = JidvUJ.hAsdpm
             end
         end)
         
-        -- Cflwwo nAOOEY pLYJTA
-        local IJpYOE = HsAbQw.IkiFtH
-        HsAbQw:WIxhuz("IkiFtH"):JjSPUA(function()
-            if HsAbQw.IkiFtH < IJpYOE then
-                local nAOOEY = WJEPqZ.TJZtrf
-                if nAOOEY.drVISF < -50 then
-                    HsAbQw.IkiFtH = IJpYOE
+        -- uOJsuJ DbJepo GkANhD
+        local UehcoJ = JidvUJ.hAsdpm
+        JidvUJ:FGbWXa("Health"):LhxEJh(function()
+            if JidvUJ.hAsdpm < UehcoJ then
+                local DbJepo = pkHhVF.cuSykD
+                if DbJepo.uSOldU < -50 then
+                    JidvUJ.hAsdpm = UehcoJ
                 end
             end
-            IJpYOE = HsAbQw.IkiFtH
+            UehcoJ = JidvUJ.hAsdpm
         end)
     end
 end
 
-fmmoeF:CFYpZm("CWpPDw SPCdcK AZegin", "DWdskM mQTWSY MBUNpu RjdhdQ", function(OgHDml)
-    if OgHDml then
-        EeUJpj()
+TPonoK:bNPXpQ("No Fall Damage", "Prevents fall damage smoothly", function(ijBEaF)
+    if ijBEaF then
+        liStms()
     end
 end)
 
--- KhusmL mIOyLH
-oOeczB:QXbQOu("KhusmL", "DypVVs GyGAsm JUdMvf", mryUSj.lYWxtL.pmbxKP, function()
-    if not YbRiTk and HAbnRH.EIwPcN then
-        YbRiTk = true
-        local WJEPqZ = HAbnRH.EIwPcN:hmbhpQ("NnkvYf")
-        if WJEPqZ then
-            local PQEMxv = RSnLIQ.XicbKy("GCTzLb")
-            PQEMxv.qpcXTc = dTMVsY.XicbKy(HvqzvQ.VaJdUz, HvqzvQ.VaJdUz, HvqzvQ.VaJdUz)
-            PQEMxv.TJZtrf = nXkLnG.tUELNf.CPDcfs * jkzIPQ
-            PQEMxv.QjtKSk = WJEPqZ
-            Izfrit:qGHWfp("onRSSa"):rLkqUS(PQEMxv, 0.2)
-            OiPGtL.IjdzwW(1)
-            YbRiTk = false
+-- edfRTl CuTZDn
+JauEoP:Wmomzf("Dash", "Press to dash", vLWpYP.EyWlod.aYBzyy, function()
+    if not fayRXy and GRQXtQ.uCXtJl then
+        fayRXy = true
+        local pkHhVF = GRQXtQ.uCXtJl:UpDbFJ("HumanoidRootPart")
+        if pkHhVF then
+            local KNJCRA = NcmjOK.fxiKuy("BodyVelocity")
+            KNJCRA.fMAXkT = wBounM.fxiKuy(Ocbasg.OVeDCy, Ocbasg.OVeDCy, Ocbasg.OVeDCy)
+            KNJCRA.cuSykD = qAbWfg.SfJcTZ.pYKdAa * TPhyRD
+            KNJCRA.FUjjsR = pkHhVF
+            bAmdUf:mBZKtY("Debris"):XDPIdi(KNJCRA, 0.2)
+            RGcUyS.GYDNpC(1)
+            fayRXy = false
         end
     end
 end)
 
--- KhusmL IJCKbQ LFXnhr
-oOeczB:JdJVsO("KhusmL IJCKbQ", "XVCOVN JUdMvf tEALOU", 500, 50, function(jSzoky)
-    jkzIPQ = jSzoky
+-- edfRTl PNmtAK dlpIRm
+JauEoP:ioRlLE("Dash Force", "Adjust dash force", 500, 50, function(hrtmfp)
+    TPhyRD = hrtmfp
 end)
 
--- aSGUwM NfKScz
-local gANbXF = AsBqLu:mVLkZW("aSGUwM")
-local eWiIkP = gANbXF:ENTpSQ("MeYONH")
+-- dzdBPG RFeGgB
+local YBTiZE = jxCLMq:KqHHij("Visual")
+local zEkBUE = YBTiZE:TzhOci("ESP")
 
--- ajDiOg pKMSVy MeYONH mdANXI
-local function NvYxLy(pZbCoM)
-    local YoSzbH = RSnLIQ.XicbKy("rWiNVd")
-    YoSzbH.pKMSVy = "locPhd"
-    YoSzbH.jNtYTC = EuCZVU.XicbKy(0, 200, 0, 50)
-    YoSzbH.ymrumb = true
-    YoSzbH.UDGSaR = dTMVsY.XicbKy(0, 2, 0)
+-- mlQqxn eiUagV rJEdhJ jTGvnP
+local function FRHtrV(olEOEK)
+    local jkpZez = NcmjOK.fxiKuy("BillboardGui")
+    jkpZez.eiUagV = "NameESP"
+    jkpZez.cnTNeq = ThFKMa.fxiKuy(0, 200, 0, 50)
+    jkpZez.RlaqIZ = true
+    jkpZez.qGvyRk = wBounM.fxiKuy(0, 2, 0)
     
-    local yHEQtf = RSnLIQ.XicbKy("axWfPm")
-    yHEQtf.pKMSVy = "GEmbvA"
-    yHEQtf.JJXYlf = 1
-    yHEQtf.jNtYTC = EuCZVU.XicbKy(1, 0, 0, 20)
-    yHEQtf.yvqOPK = mryUSj.yvqOPK.mJWAWV
-    yHEQtf.slZZPv = intqke.XicbKy(1, 1, 1)
-    yHEQtf.RDfwpa = 14
-    yHEQtf.ehDdVJ = pZbCoM.pKMSVy
-    yHEQtf.QjtKSk = YoSzbH
+    local cEhBpu = NcmjOK.fxiKuy("TextLabel")
+    cEhBpu.eiUagV = "PlayerName"
+    cEhBpu.rRROAI = 1
+    cEhBpu.cnTNeq = ThFKMa.fxiKuy(1, 0, 0, 20)
+    cEhBpu.iMlfjU = vLWpYP.iMlfjU.IndmjN
+    cEhBpu.GgaKiV = NbgoZs.fxiKuy(1, 1, 1)
+    cEhBpu.qoOBsE = 14
+    cEhBpu.wLEHna = olEOEK.eiUagV
+    cEhBpu.FUjjsR = jkpZez
     
-    return YoSzbH
+    return jkpZez
 end
 
--- MeYONH tZbTFX mdANXI
-local function bXqQry()
-    while ZFoboJ do
-        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
-            if pZbCoM ~= HAbnRH then
-                if pZbCoM.EIwPcN and pZbCoM.EIwPcN:hmbhpQ("WwQOWO") then
-                    if locPhd[pZbCoM] then
-                        if not pZbCoM.EIwPcN.WwQOWO:hmbhpQ("locPhd") then
-                            local EMahWi = NvYxLy(pZbCoM)
-                            locPhd[pZbCoM] = EMahWi
-                            EMahWi.QjtKSk = pZbCoM.EIwPcN.WwQOWO
+-- rJEdhJ qPQjhl jTGvnP
+local function fgDSnA()
+    while KgITlK do
+        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
+            if olEOEK ~= GRQXtQ then
+                if olEOEK.uCXtJl and olEOEK.uCXtJl:UpDbFJ("Head") then
+                    if KDUuLa[olEOEK] then
+                        if not olEOEK.uCXtJl.CBESya:UpDbFJ("NameESP") then
+                            local zaVeOu = FRHtrV(olEOEK)
+                            KDUuLa[olEOEK] = zaVeOu
+                            zaVeOu.FUjjsR = olEOEK.uCXtJl.CBESya
                         end
                     end
                     
-                    if pZbCoM.EIwPcN:hmbhpQ("HsAbQw") then
-                        local ogwOZE = pZbCoM.EIwPcN:hmbhpQ("KyVLrN")
-                        if ogwOZE then
-                            local BOJrDN = pZbCoM.EIwPcN.HsAbQw.IkiFtH
-                            local zqRUQn = pZbCoM.EIwPcN.HsAbQw.AcIKFl
-                            local yJuxWO = BOJrDN/zqRUQn
-                            ogwOZE.PXhbwv = intqke.XicbKy(1-yJuxWO, yJuxWO, 0)
+                    if olEOEK.uCXtJl:UpDbFJ("Humanoid") then
+                        local BIDtuN = olEOEK.uCXtJl:UpDbFJ("ESP_Highlight")
+                        if BIDtuN then
+                            local qYnDvR = olEOEK.uCXtJl.JidvUJ.hAsdpm
+                            local EgLZdn = olEOEK.uCXtJl.JidvUJ.OzKAxQ
+                            local ARpeIJ = qYnDvR/EgLZdn
+                            BIDtuN.OiOFqC = NbgoZs.fxiKuy(1-ARpeIJ, ARpeIJ, 0)
                         end
                     end
                     
-                    if aMpFaB[pZbCoM] then
-                        if not pZbCoM.EIwPcN:hmbhpQ("AkfylE") then
-                            local ogwOZE = RSnLIQ.XicbKy("AkfylE")
-                            ogwOZE.YGoOiJ = 0.5
-                            ogwOZE.OMzxPS = 0
-                            ogwOZE.PXhbwv = weZNlt
-                            ogwOZE.NyWFqm = intqke.XicbKy(1, 1, 1)
-                            ogwOZE.QjtKSk = pZbCoM.EIwPcN
-                            aMpFaB[pZbCoM] = ogwOZE
+                    if xvcyny[olEOEK] then
+                        if not olEOEK.uCXtJl:UpDbFJ("Highlight") then
+                            local BIDtuN = NcmjOK.fxiKuy("Highlight")
+                            BIDtuN.QvdTwE = 0.5
+                            BIDtuN.EUVrpD = 0
+                            BIDtuN.OiOFqC = JSyPXV
+                            BIDtuN.AppHIp = NbgoZs.fxiKuy(1, 1, 1)
+                            BIDtuN.FUjjsR = olEOEK.uCXtJl
+                            xvcyny[olEOEK] = BIDtuN
                         end
                     end
                 end
             end
         end
-        OiPGtL.IjdzwW(0.1)
+        RGcUyS.GYDNpC(0.1)
     end
 end
 
--- MeYONH xPUvLj
-eWiIkP:CFYpZm("pKMSVy MeYONH", "smUyoe pZbCoM LWDWTN", function(OgHDml)
-    if OgHDml then
-        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
-            if pZbCoM ~= HAbnRH and pZbCoM.EIwPcN then
-                local EMahWi = NvYxLy(pZbCoM)
-                locPhd[pZbCoM] = EMahWi
-                EMahWi.QjtKSk = pZbCoM.EIwPcN:QdLfGi("WwQOWO")
+-- rJEdhJ GYYTsR
+zEkBUE:bNPXpQ("Name ESP", "Shows player names", function(ijBEaF)
+    if ijBEaF then
+        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
+            if olEOEK ~= GRQXtQ and olEOEK.uCXtJl then
+                local zaVeOu = FRHtrV(olEOEK)
+                KDUuLa[olEOEK] = zaVeOu
+                zaVeOu.FUjjsR = olEOEK.uCXtJl:LtJdDD("Head")
             end
         end
     else
-        for nRBUJL, EMahWi in wfDeXX(locPhd) do
-            EMahWi:QNdyAZ()
+        for cdpabP, zaVeOu in deHlgJ(KDUuLa) do
+            zaVeOu:ILxsTb()
         end
-        locPhd = {}
+        KDUuLa = {}
     end
 end)
 
-eWiIkP:CFYpZm("IkiFtH MeYONH", "smUyoe BOJrDN-zRjCql LNOoyT", function(OgHDml)
-    if OgHDml then
-        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
-            if pZbCoM ~= HAbnRH and pZbCoM.EIwPcN then
-                local ogwOZE = RSnLIQ.XicbKy("AkfylE")
-                ogwOZE.pKMSVy = "KyVLrN"
-                ogwOZE.QjtKSk = pZbCoM.EIwPcN
+zEkBUE:bNPXpQ("Health ESP", "Shows health-based highlights", function(ijBEaF)
+    if ijBEaF then
+        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
+            if olEOEK ~= GRQXtQ and olEOEK.uCXtJl then
+                local BIDtuN = NcmjOK.fxiKuy("Highlight")
+                BIDtuN.eiUagV = "ESP_Highlight"
+                BIDtuN.FUjjsR = olEOEK.uCXtJl
             end
         end
     else
-        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
-            if pZbCoM.EIwPcN then
-                local ogwOZE = pZbCoM.EIwPcN:hmbhpQ("KyVLrN")
-                if ogwOZE then ogwOZE:QNdyAZ() end
+        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
+            if olEOEK.uCXtJl then
+                local BIDtuN = olEOEK.uCXtJl:UpDbFJ("ESP_Highlight")
+                if BIDtuN then BIDtuN:ILxsTb() end
             end
         end
     end
 end)
 
-eWiIkP:YmownW("MeYONH GOvIcB", "hIKAzf zPuUTo MeYONH sSQino", intqke.XicbKy(1, 0, 0), function(sSQino)
-    weZNlt = sSQino
-    for nRBUJL, ogwOZE in wfDeXX(aMpFaB) do
-        ogwOZE.PXhbwv = sSQino
+zEkBUE:hZYcrp("ESP Color", "Pick custom ESP color", NbgoZs.fxiKuy(1, 0, 0), function(pseEXG)
+    JSyPXV = pseEXG
+    for cdpabP, BIDtuN in deHlgJ(xvcyny) do
+        BIDtuN.OiOFqC = pseEXG
     end
 end)
 
-eWiIkP:CFYpZm("OrkagD MeYONH", "smUyoe zPuUTo sSQino LNOoyT", function(OgHDml)
-    if OgHDml then
-        for nRBUJL, pZbCoM in CNndxZ(JzsdXE:erRphD()) do
-            if pZbCoM ~= HAbnRH and pZbCoM.EIwPcN then
-                local ogwOZE = RSnLIQ.XicbKy("AkfylE")
-                ogwOZE.YGoOiJ = 0.5
-                ogwOZE.OMzxPS = 0
-                ogwOZE.PXhbwv = weZNlt
-                ogwOZE.NyWFqm = intqke.XicbKy(1, 1, 1)
-                ogwOZE.QjtKSk = pZbCoM.EIwPcN
-                aMpFaB[pZbCoM] = ogwOZE
+zEkBUE:bNPXpQ("Custom ESP", "Shows custom color highlights", function(ijBEaF)
+    if ijBEaF then
+        for cdpabP, olEOEK in DVOlJG(AkqBRJ:QWmlRC()) do
+            if olEOEK ~= GRQXtQ and olEOEK.uCXtJl then
+                local BIDtuN = NcmjOK.fxiKuy("Highlight")
+                BIDtuN.QvdTwE = 0.5
+                BIDtuN.EUVrpD = 0
+                BIDtuN.OiOFqC = JSyPXV
+                BIDtuN.AppHIp = NbgoZs.fxiKuy(1, 1, 1)
+                BIDtuN.FUjjsR = olEOEK.uCXtJl
+                xvcyny[olEOEK] = BIDtuN
             end
         end
     else
-        for nRBUJL, ogwOZE in wfDeXX(aMpFaB) do
-            ogwOZE:QNdyAZ()
+        for cdpabP, BIDtuN in deHlgJ(xvcyny) do
+            BIDtuN:ILxsTb()
         end
-        aMpFaB = {}
+        xvcyny = {}
     end
 end)
 
-eWiIkP:CFYpZm("uODfhX MeYONH wImGKg", "DWhfyL fMNLuM MeYONH aFcmZS", function(OgHDml)
-    ZFoboJ = not OgHDml
-    if ZFoboJ then
-        OiPGtL.QCdqEe(bXqQry)
+zEkBUE:bNPXpQ("Stop ESP Updates", "Stops all ESP updates", function(ijBEaF)
+    KgITlK = not ijBEaF
+    if KgITlK then
+        RGcUyS.rTMqJh(fgDSnA)
     end
 end)
 
--- PWRYQs NfKScz
-local crsMHu = AsBqLu:mVLkZW("PWRYQs")
-local ZPtoCy = crsMHu:ENTpSQ("Kroxdt PWRYQs")
+-- JRtAxJ RFeGgB
+local olCTmy = jxCLMq:KqHHij("Settings")
+local eMMNLu = olCTmy:TzhOci("GUI Settings")
 
-ZPtoCy:ubeuGc("sFvxGg", "TzMldW YrVxOZ sFvxGg", {
-    "dHLnOr",
-    "pzkLqy", 
-    "WUUXLS",
-    "SWHGXk",
-    "iJssgq",
-    "zjOrJb",
-    "EOeHDk",
-    "RVLoBW"
-}, function(PjniOT)
-    rugjve:SoZyBP(PjniOT)
+eMMNLu:EkYqbb("Theme", "Change UI Theme", {
+    "DarkTheme",
+    "LightTheme", 
+    "BloodTheme",
+    "GrapeTheme",
+    "Ocean",
+    "Midnight",
+    "Sentinel",
+    "Synapse"
+}, function(JXGeRb)
+    cZBmBY:bgRYxd(JXGeRb)
 end)
 
-ZPtoCy:QXbQOu("xSaKCa Kroxdt", "smUyoe/SiqDTR czyeYG Kroxdt", mryUSj.lYWxtL.ULVtlq, function()
-    rugjve:TjHlOQ()
+eMMNLu:Wmomzf("Toggle GUI", "Shows/Hides the GUI", vLWpYP.EyWlod.yQiujk, function()
+    cZBmBY:PBHKiT()
 end)
 
--- TFkEta MeYONH tZbTFX pENLLy
-OiPGtL.QCdqEe(bXqQry)
+-- FKlkPj rJEdhJ qPQjhl UegsbF
+RGcUyS.rTMqJh(fgDSnA)
 
--- qvyPBq GsgqkT
-JzsdXE.VFxhmd:JjSPUA(function(pZbCoM)
-    pZbCoM.TtKZtm:JjSPUA(function(pzsQUK)
-        if locPhd[pZbCoM] then
-            local EMahWi = NvYxLy(pZbCoM)
-            locPhd[pZbCoM] = EMahWi
-            EMahWi.QjtKSk = pzsQUK:QdLfGi("WwQOWO")
+-- dgyxog kLTnDc
+AkqBRJ.smVIBQ:LhxEJh(function(olEOEK)
+    olEOEK.wyfltI:LhxEJh(function(gsbJRU)
+        if KDUuLa[olEOEK] then
+            local zaVeOu = FRHtrV(olEOEK)
+            KDUuLa[olEOEK] = zaVeOu
+            zaVeOu.FUjjsR = gsbJRU:LtJdDD("Head")
         end
     end)
 end)
 
-JzsdXE.gSulli:JjSPUA(function(pZbCoM)
-    if locPhd[pZbCoM] then
-        locPhd[pZbCoM]:QNdyAZ()
-        locPhd[pZbCoM] = nil
+AkqBRJ.UnocYN:LhxEJh(function(olEOEK)
+    if KDUuLa[olEOEK] then
+        KDUuLa[olEOEK]:ILxsTb()
+        KDUuLa[olEOEK] = nil
     end
-    if aMpFaB[pZbCoM] then
-        aMpFaB[pZbCoM]:QNdyAZ()
-        aMpFaB[pZbCoM] = nil
+    if xvcyny[olEOEK] then
+        xvcyny[olEOEK]:ILxsTb()
+        xvcyny[olEOEK] = nil
     end
 end)
+
+

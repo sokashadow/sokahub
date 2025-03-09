@@ -308,7 +308,7 @@ ESPSection:NewToggle("Health Number ESP", "Shows player health as a number above
                     billboard.Name = "HealthESP"
                     billboard.Size = UDim2.new(0, 100, 0, 50)
                     billboard.AlwaysOnTop = true
-                    billboard.StudsOffset = Vector3.new(0, 4, 0)  -- Adjust offset as needed
+                    billboard.StudsOffset = Vector3.new(0, 4, 0)
                     local textLabel = Instance.new("TextLabel", billboard)
                     textLabel.BackgroundTransparency = 1
                     textLabel.Size = UDim2.new(1, 0, 1, 0)
@@ -338,7 +338,7 @@ ESPSection:NewToggle("Health Number ESP", "Shows player health as a number above
                         billboard.Size = UDim2.new(0, 100, 0, 50)
                         billboard.AlwaysOnTop = true
                         billboard.StudsOffset = Vector3.new(0, 4, 0)
-                        local textLabel = Instance.new("TextLabel", billboard)
+                                                local textLabel = Instance.new("TextLabel", billboard)
                         textLabel.BackgroundTransparency = 1
                         textLabel.Size = UDim2.new(1, 0, 1, 0)
                         textLabel.Font = Enum.Font.SourceSansBold
@@ -354,7 +354,7 @@ ESPSection:NewToggle("Health Number ESP", "Shows player health as a number above
                         end)
                         HealthESPConnections[player] = con
                     end
-                end
+                end)
             end)
         end)
     else
@@ -393,4 +393,56 @@ SettingsSection:NewDropdown("Theme", "Change UI Theme", {
     Library:ChangeTheme(currentTheme)
 end)
 
-SettingsSection:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode
+SettingsSection:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode.RightShift, function()
+    Library:ToggleUI()
+end)
+
+local function unloadScript()
+    for _, con in ipairs(connections) do
+        pcall(function() con:Disconnect() end)
+    end
+    connections = {}
+    RunESPUpdate = false
+    for _, esp in pairs(NameESP) do
+        if esp and esp.Destroy then
+            pcall(function() esp:Destroy() end)
+        end
+    end
+    NameESP = {}
+    for _, highlight in pairs(CustomHighlights) do
+        if highlight and highlight.Destroy then
+            pcall(function() highlight:Destroy() end)
+        end
+    end
+    CustomHighlights = {}
+    if Window and Window.Destroy then
+        pcall(function() Window:Destroy() end)
+    end
+    print("Script unloaded successfully.")
+end
+
+SettingsSection:NewButton("Unload Script", "Unload all changes and close the GUI", unloadScript)
+
+task.spawn(UpdateAllESP)
+
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        if NameESP[player] then
+            local esp = CreateNameESP(player)
+            NameESP[player] = esp
+            esp.Parent = character:WaitForChild("Head")
+        end
+    end)
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+    if NameESP[player] then
+        pcall(function() NameESP[player]:Destroy() end)
+        NameESP[player] = nil
+    end
+    if CustomHighlights[player] then
+        pcall(function() CustomHighlights[player]:Destroy() end)
+        CustomHighlights[player] = nil
+    end
+end)
+

@@ -426,4 +426,23 @@ local function unloadScript()
 	print("Script unloaded successfully.")
 end
 
-SettingsSection:NewButton("Unload Script",
+SettingsSection:NewButton("Unload Script", "Unload all changes and close the GUI", unloadScript)
+
+-- Additional cleanup connections
+Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		if NameESP[player] then
+			local esp = CreateNameESP(player)
+			NameESP[player] = esp
+			esp.Parent = character:WaitForChild("Head")
+		end
+	end)
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+	if NameESP[player] then
+		pcall(function() NameESP[player]:Destroy() end)
+		NameESP[player] = nil
+	end
+	if CustomHighlights[player] then
+		pcall(function() CustomHighlights

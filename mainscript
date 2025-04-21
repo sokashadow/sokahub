@@ -181,6 +181,7 @@ local function CreateNameESP(player)
     billboard.Size = UDim2.new(0, 200, 0, 50)
     billboard.AlwaysOnTop = true
     billboard.StudsOffset = Vector3.new(0, 2, 0)
+    
     local name = Instance.new("TextLabel")
     name.Name = "PlayerName"
     name.BackgroundTransparency = 1
@@ -190,7 +191,43 @@ local function CreateNameESP(player)
     name.TextSize = 14
     name.Text = player.Name
     name.Parent = billboard
+    
     return billboard
+end
+
+local function SetupESPForPlayer(player)
+    player.CharacterAdded:Connect(function(character)
+        if HealthESPenabled and player ~= LocalPlayer then
+            character:WaitForChild("Humanoid").Died:Connect(function()
+                if HealthESPTable[player] then
+                    HealthESPTable[player]:Destroy()
+                    HealthESPTable[player] = nil
+                end
+            end)
+
+            if character:FindFirstChild("Head") then
+                local humanoid = character:WaitForChild("Humanoid")
+                local billboard = CreateNameESP(player)
+                billboard.Parent = character:WaitForChild("Head")
+                HealthESPTable[player] = billboard
+
+                local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+                    if billboard and billboard:FindFirstChild("PlayerName") then
+                        billboard.PlayerName.Text = "HP: " .. math.floor(humanoid.Health)
+                    end
+                end)
+                HealthESPConnections[player] = con
+            end
+        end
+    end)
+
+    -- Check if the player is already in the game
+    if player.Character and player.Character:FindFirstChild("Head") then
+        local humanoid = player.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            SetupESPForPlayer(player)
+        end
+    end
 end
 
 local function UpdateAllESP()
@@ -203,26 +240,6 @@ local function UpdateAllESP()
                             local esp = CreateNameESP(player)
                             NameESP[player] = esp
                             esp.Parent = player.Character.Head
-                        end
-                    end
-                    if player.Character:FindFirstChild("Humanoid") then
-                        local highlight = player.Character:FindFirstChild("ESP_Highlight")
-                        if highlight then
-                            local health = player.Character.Humanoid.Health
-                            local maxHealth = player.Character.Humanoid.MaxHealth
-                            local healthPercent = health / maxHealth
-                            highlight.FillColor = Color3.new(1 - healthPercent, healthPercent, 0)
-                        end
-                    end
-                    if CustomHighlights[player] then
-                        if not player.Character:FindFirstChild("Highlight") then
-                            local highlight = Instance.new("Highlight")
-                            highlight.FillTransparency = 0.5
-                            highlight.OutlineTransparency = 0
-                            highlight.FillColor = CustomESPColor
-                            highlight.OutlineColor = Color3.new(1, 1, 1)
-                            highlight.Parent = player.Character
-                            CustomHighlights[player] = highlight
                         end
                     end
                 end
@@ -424,25 +441,13 @@ local function SetupESPForPlayer(player)
 
             if character:FindFirstChild("Head") then
                 local humanoid = character:WaitForChild("Humanoid")
-                local billboard = Instance.new("BillboardGui")
-                billboard.Name = "HealthESP"
-                billboard.Size = UDim2.new(0, 100, 0, 50)
-                billboard.AlwaysOnTop = true
-                billboard.StudsOffset = Vector3.new(0, 4, 0)
-                local textLabel = Instance.new("TextLabel")
-                textLabel.BackgroundTransparency = 1
-                textLabel.Size = UDim2.new(1, 0, 1, 0)
-                textLabel.Font = Enum.Font.SourceSansBold
-                textLabel.TextSize = 14
-                textLabel.TextColor3 = Color3.new(1, 1, 1)
-                textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                textLabel.Parent = billboard
+                local billboard = CreateNameESP(player)
                 billboard.Parent = character:WaitForChild("Head")
                 HealthESPTable[player] = billboard
 
                 local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-                    if billboard and textLabel then
-                        textLabel.Text = "HP: " .. math.floor(humanoid.Health)
+                    if billboard and billboard:FindFirstChild("PlayerName") then
+                        billboard.PlayerName.Text = "HP: " .. math.floor(humanoid.Health)
                     end
                 end)
                 HealthESPConnections[player] = con

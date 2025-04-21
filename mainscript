@@ -415,6 +415,13 @@ end
 local function SetupESPForPlayer(player)
     player.CharacterAdded:Connect(function(character)
         if HealthESPenabled and player ~= LocalPlayer then
+            character:WaitForChild("Humanoid").Died:Connect(function()
+                if HealthESPTable[player] then
+                    HealthESPTable[player]:Destroy()
+                    HealthESPTable[player] = nil
+                end
+            end)
+
             if character:FindFirstChild("Head") then
                 local humanoid = character:WaitForChild("Humanoid")
                 local billboard = Instance.new("BillboardGui")

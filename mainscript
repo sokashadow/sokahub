@@ -102,9 +102,9 @@ FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 200, 1, function(
     FlightSpeed = value
 end)
 
--- Clean NoClip toggle using BindToRenderStep and UnbindFromRenderStep for a single connection
-MiscSection:NewToggle("NoClip", "Phase through objects", function(state)
-    NoClipEnabled = state
+-- NoClip Toggle with Keybind
+MiscSection:NewKeybind("NoClip Toggle", "Toggle NoClip with key", Enum.KeyCode.N, function()
+    NoClipEnabled = not NoClipEnabled
     if NoClipEnabled then
         RunService:BindToRenderStep("NoClip", 100, function()
             if LocalPlayer.Character then

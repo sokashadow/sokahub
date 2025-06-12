@@ -2,474 +2,474 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 
 local Window = Library.CreateLib("Soka Hub", "DarkTheme")
 
--- Services
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Camera = workspace.CurrentCamera
-local UserInputService = game:GetService("UserInputService")
+-- k7tAbW6m
+QDhZDvc0 Jy4UEdhZ = HpCiNT0Q:rxk28jJQ("Jy4UEdhZ")
+QDhZDvc0 11RuIhOE = HpCiNT0Q:rxk28jJQ("11RuIhOE")
+QDhZDvc0 CoYr43Ct = 11RuIhOE.CoYr43Ct
+QDhZDvc0 N1Z7Jbyt = oBq8KMzv.Mapl8jJp
+QDhZDvc0 D6arukKD = HpCiNT0Q:rxk28jJQ("D6arukKD")
 
--- Global table for all connections
-local connections = {}
+-- XDRG8nCF jHovnCPr RCIU3ms6 6v4LgzbG th6iLiBs
+QDhZDvc0 th6iLiBs = {}
 
--- States
-local FlightEnabled = false
-local SpeedEnabled = false
-local NoClipEnabled = false
-local TargetSpeed = 1         -- Default horizontal speed from slider
-local FlightSpeed = 50
-local DashSpeed = 100
-local DashCooldown = false
-local RunESPUpdate = true
-local NameESP = {}
-local CustomHighlights = {}
-local CustomESPColor = Color3.new(1, 0, 0)
+-- KBBaeQSU
+QDhZDvc0 Wf4hhJFW = ij25nC66
+QDhZDvc0 25gMjH7A = ij25nC66
+QDhZDvc0 2Bfa2pR9 = ij25nC66
+QDhZDvc0 i39VU46F = 1         -- qw08V1CK GipJgb3T MPRk1s9H rJMOFGm3 D527FWzX
+QDhZDvc0 VKlQJ5vS = 50
+QDhZDvc0 lVszZguD = 100
+QDhZDvc0 SQrliHL8 = ij25nC66
+QDhZDvc0 2fUD11KK = HekIGsyP
+QDhZDvc0 9XFdxchq = {}
+QDhZDvc0 RZlneyLU = {}
+QDhZDvc0 kuCRlstu = r4FH0LM6.Af5KaLS7(1, 0, 0)
 
--- Tables for Health Number ESP
-local HealthESPenabled = false
-local HealthESPTable = {}
-local HealthESPConnections = {}
+-- N3Ju9hV1 RCIU3ms6 Dxr9jQca pRRRr7q5 rsloGjY3
+QDhZDvc0 YkGGk4Ib = ij25nC66
+QDhZDvc0 UrJ8L817 = {}
+QDhZDvc0 gAu4oFCF = {}
 
--- Main Tab
-local MainTab = Window:NewTab("Main")
-local SpeedSection = MainTab:NewSection("Speed")
-local FlightSection = MainTab:NewSection("Flight")
-local DashSection = MainTab:NewSection("Dash")
-local MiscSection = MainTab:NewSection("Misc")
+-- GJpkle2T g7JF2J6W
+QDhZDvc0 rBnpRob9 = JDoDYVN0:2DAm9Q1X("GJpkle2T")
+QDhZDvc0 jR06HWWb = rBnpRob9:AsBmKwvn("sOVLmisb")
+QDhZDvc0 8k5LYIoT = rBnpRob9:AsBmKwvn("Fl67hLB2")
+QDhZDvc0 g9m2lfQy = rBnpRob9:AsBmKwvn("xsmudOuP")
+QDhZDvc0 DuueDkZl = rBnpRob9:AsBmKwvn("HwMJcUKD")
 
--- Speed Toggle with smooth horizontal velocity update (preserves vertical velocity)
-SpeedSection:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X, function()
-    SpeedEnabled = not SpeedEnabled
-    if SpeedEnabled then
-        local speedConnection = RunService.Heartbeat:Connect(function()
-            if LocalPlayer.Character and SpeedEnabled then
-                local hrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
-                if hrp and humanoid then
-                    local moveDir = humanoid.MoveDirection
-                    local currentVel = hrp.Velocity
-                    local desiredVel = Vector3.new(moveDir.X * TargetSpeed, currentVel.Y, moveDir.Z * TargetSpeed)
-                    hrp.Velocity = currentVel:Lerp(desiredVel, 0.2)
-                end
-            end
-        end)
-        table.insert(connections, speedConnection)
-    end
-end)
+-- sOVLmisb sKyUIzG7 V4pxxcrK PGGLO4Xo GipJgb3T bxbEk4Gr We7gk5LA (ptKEiQRz v4X5BcaG bxbEk4Gr)
+jR06HWWb:S5aR7X4G("sOVLmisb sKyUIzG7", "sKyUIzG7 MPRk1s9H V4pxxcrK zeaAEdP0", 1xxzQwga.qU51B5Pq.WNYshRD4, hdfyXrIF()
+    25gMjH7A = DaIpmF3p 25gMjH7A
+    G7cXb7fb 25gMjH7A 9ebaVtu2
+        QDhZDvc0 i8IMbuU2 = Jy4UEdhZ.kbAcM8Ly:CXDGKvsO(hdfyXrIF()
+            G7cXb7fb CoYr43Ct.vBaJMGMM 7cJR5BkP 25gMjH7A 9ebaVtu2
+                QDhZDvc0 ckv3AyJ7 = CoYr43Ct.vBaJMGMM:H9Dx9JqU("jzkasxoc")
+                QDhZDvc0 JS4XY7ZO = CoYr43Ct.vBaJMGMM:H9Dx9JqU("a65WNAi5")
+                G7cXb7fb ckv3AyJ7 7cJR5BkP JS4XY7ZO 9ebaVtu2
+                    QDhZDvc0 1arGsS3h = JS4XY7ZO.spKwQTY1
+                    QDhZDvc0 Z98RWRYr = ckv3AyJ7.CwEGfDXC
+                    QDhZDvc0 WAVxrrt9 = uPs2EiWf.Af5KaLS7(1arGsS3h.WNYshRD4 * i39VU46F, Z98RWRYr.h9AW6DHt, 1arGsS3h.rZTbNAn3 * i39VU46F)
+                    ckv3AyJ7.CwEGfDXC = Z98RWRYr:MS5OR8Fw(WAVxrrt9, 0.2)
+                narB64Sh
+            narB64Sh
+        narB64Sh)
+        jHovnCPr.LDl8cSPH(th6iLiBs, i8IMbuU2)
+    narB64Sh
+narB64Sh)
 
-SpeedSection:NewSlider("Speed Value", "Adjust speed value", 200, 1, function(value)
-    TargetSpeed = value
-end, 1)
+jR06HWWb:OpxURU7A("sOVLmisb BlwT2ZOo", "o18IhLiw MPRk1s9H eQtz5E2f", 200, 1, hdfyXrIF(eQtz5E2f)
+    i39VU46F = eQtz5E2f
+narB64Sh, 1)
 
--- Flight Toggle with smooth interpolation
-FlightSection:NewKeybind("Flight Toggle", "Toggle flight with key", Enum.KeyCode.F, function()
-    FlightEnabled = not FlightEnabled
-    if FlightEnabled then
-        local char = LocalPlayer.Character
-        if char then
-            local humanoid = char:WaitForChild("Humanoid")
-            local hrp = char:WaitForChild("HumanoidRootPart")
-            local flightConn = RunService.RenderStepped:Connect(function()
-                if FlightEnabled then
-                    local desiredVel = Vector3.new(0, 0, 0)
-                    if UserInputService:IsKeyDown(Enum.KeyCode.W) then
-                        desiredVel = desiredVel + (Camera.CFrame.LookVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.S) then
-                        desiredVel = desiredVel - (Camera.CFrame.LookVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.D) then
-                        desiredVel = desiredVel + (Camera.CFrame.RightVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.A) then
-                        desiredVel = desiredVel - (Camera.CFrame.RightVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
-                        desiredVel = desiredVel + Vector3.new(0, FlightSpeed, 0)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-                        desiredVel = desiredVel - Vector3.new(0, FlightSpeed, 0)
-                    end
-                    hrp.Velocity = hrp.Velocity:Lerp(desiredVel, 0.1)
-                end
-            end)
-            table.insert(connections, flightConn)
-        end
-    end
-end)
+-- Fl67hLB2 sKyUIzG7 V4pxxcrK PGGLO4Xo fbbdlk2n
+8k5LYIoT:S5aR7X4G("Fl67hLB2 sKyUIzG7", "sKyUIzG7 K77DPX8E V4pxxcrK zeaAEdP0", 1xxzQwga.qU51B5Pq.plg70DfF, hdfyXrIF()
+    Wf4hhJFW = DaIpmF3p Wf4hhJFW
+    G7cXb7fb Wf4hhJFW 9ebaVtu2
+        QDhZDvc0 YjMwXsZC = CoYr43Ct.vBaJMGMM
+        G7cXb7fb YjMwXsZC 9ebaVtu2
+            QDhZDvc0 JS4XY7ZO = YjMwXsZC:H69vYqAV("a65WNAi5")
+            QDhZDvc0 ckv3AyJ7 = YjMwXsZC:H69vYqAV("jzkasxoc")
+            QDhZDvc0 Er9LSwce = Jy4UEdhZ.fci2feCZ:CXDGKvsO(hdfyXrIF()
+                G7cXb7fb Wf4hhJFW 9ebaVtu2
+                    QDhZDvc0 WAVxrrt9 = uPs2EiWf.Af5KaLS7(0, 0, 0)
+                    G7cXb7fb D6arukKD:LMs0s4VL(1xxzQwga.qU51B5Pq.xQocFvoZ) 9ebaVtu2
+                        WAVxrrt9 = WAVxrrt9 + (N1Z7Jbyt.EBFwJmk1.m8E4Z1TS * VKlQJ5vS)
+                    narB64Sh
+                    G7cXb7fb D6arukKD:LMs0s4VL(1xxzQwga.qU51B5Pq.qxoapPRd) 9ebaVtu2
+                        WAVxrrt9 = WAVxrrt9 - (N1Z7Jbyt.EBFwJmk1.m8E4Z1TS * VKlQJ5vS)
+                    narB64Sh
+                    G7cXb7fb D6arukKD:LMs0s4VL(1xxzQwga.qU51B5Pq.eQAvUxrz) 9ebaVtu2
+                        WAVxrrt9 = WAVxrrt9 + (N1Z7Jbyt.EBFwJmk1.h4EdJ3sr * VKlQJ5vS)
+                    narB64Sh
+                    G7cXb7fb D6arukKD:LMs0s4VL(1xxzQwga.qU51B5Pq.R58w3cmB) 9ebaVtu2
+                        WAVxrrt9 = WAVxrrt9 - (N1Z7Jbyt.EBFwJmk1.h4EdJ3sr * VKlQJ5vS)
+                    narB64Sh
+                    G7cXb7fb D6arukKD:LMs0s4VL(1xxzQwga.qU51B5Pq.SfXEZqt7) 9ebaVtu2
+                        WAVxrrt9 = WAVxrrt9 + uPs2EiWf.Af5KaLS7(0, VKlQJ5vS, 0)
+                    narB64Sh
+                    G7cXb7fb D6arukKD:LMs0s4VL(1xxzQwga.qU51B5Pq.vvPvtkvL) 9ebaVtu2
+                        WAVxrrt9 = WAVxrrt9 - uPs2EiWf.Af5KaLS7(0, VKlQJ5vS, 0)
+                    narB64Sh
+                    ckv3AyJ7.CwEGfDXC = ckv3AyJ7.CwEGfDXC:MS5OR8Fw(WAVxrrt9, 0.1)
+                narB64Sh
+            narB64Sh)
+            jHovnCPr.LDl8cSPH(th6iLiBs, Er9LSwce)
+        narB64Sh
+    narB64Sh
+narB64Sh)
 
-FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 200, 1, function(value)
-    FlightSpeed = value
-end)
+8k5LYIoT:OpxURU7A("Fl67hLB2 sOVLmisb", "o18IhLiw K77DPX8E MPRk1s9H", 200, 1, hdfyXrIF(eQtz5E2f)
+    VKlQJ5vS = eQtz5E2f
+narB64Sh)
 
--- NoClip Toggle with Keybind
-MiscSection:NewKeybind("NoClip Toggle", "Toggle NoClip with key", Enum.KeyCode.N, function()
-    NoClipEnabled = not NoClipEnabled
-    if NoClipEnabled then
-        RunService:BindToRenderStep("NoClip", 100, function()
-            if LocalPlayer.Character then
-                for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
-                    end
-                end
-            end
-        end)
-    else
-        RunService:UnbindFromRenderStep("NoClip")
-    end
-end)
+-- aq84fCFF sKyUIzG7 V4pxxcrK nJLmcuUe
+DuueDkZl:S5aR7X4G("aq84fCFF sKyUIzG7", "sKyUIzG7 aq84fCFF V4pxxcrK zeaAEdP0", 1xxzQwga.qU51B5Pq.DiSl1O0e, hdfyXrIF()
+    2Bfa2pR9 = DaIpmF3p 2Bfa2pR9
+    G7cXb7fb 2Bfa2pR9 9ebaVtu2
+        Jy4UEdhZ:JEmgpnIq("aq84fCFF", 100, hdfyXrIF()
+            G7cXb7fb CoYr43Ct.vBaJMGMM 9ebaVtu2
+                RCIU3ms6 fLjEIauH, 7p2z3knI hpGx935Z XE6iOrJ5(CoYr43Ct.vBaJMGMM:9yh8hDS5()) lwpmM84H
+                    G7cXb7fb 7p2z3knI:RFXVMXdb("8vXaqEiG") 9ebaVtu2
+                        7p2z3knI.oo40jACS = ij25nC66
+                    narB64Sh
+                narB64Sh
+            narB64Sh
+        narB64Sh)
+    Lh84HGR8
+        Jy4UEdhZ:2hatLMr8("aq84fCFF")
+    narB64Sh
+narB64Sh)
 
-local function SmoothNoFallDamage()
-    if LocalPlayer.Character then
-        local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
-        local HRP = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
-        local stateCon = Humanoid.StateChanged:Connect(function(_, new)
-            if new == Enum.HumanoidStateType.Landed then
-                task.wait()
-                Humanoid.Health = Humanoid.Health
-            end
-        end)
-        table.insert(connections, stateCon)
-        local lastHealth = Humanoid.Health
-        local healthCon = Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-            if Humanoid.Health < lastHealth then
-                local velocity = HRP.Velocity
-                if velocity.Y < -50 then
-                    Humanoid.Health = lastHealth
-                end
-            end
-            lastHealth = Humanoid.Health
-        end)
-        table.insert(connections, healthCon)
-    end
-end
+QDhZDvc0 hdfyXrIF 2p7w9Hsr()
+    G7cXb7fb CoYr43Ct.vBaJMGMM 9ebaVtu2
+        QDhZDvc0 a65WNAi5 = CoYr43Ct.vBaJMGMM:H69vYqAV("a65WNAi5")
+        QDhZDvc0 eIPADU7B = CoYr43Ct.vBaJMGMM:H69vYqAV("jzkasxoc")
+        QDhZDvc0 S7YnKC2y = a65WNAi5.cNNVCODy:CXDGKvsO(hdfyXrIF(fLjEIauH, Af5KaLS7)
+            G7cXb7fb Af5KaLS7 == 1xxzQwga.ALIRvyWR.rFIVe4z3 9ebaVtu2
+                q8gwZkzG.PtVkgjFH()
+                a65WNAi5.Dxr9jQca = a65WNAi5.Dxr9jQca
+            narB64Sh
+        narB64Sh)
+        jHovnCPr.LDl8cSPH(th6iLiBs, S7YnKC2y)
+        QDhZDvc0 6Bzyt87c = a65WNAi5.Dxr9jQca
+        QDhZDvc0 6LMHi7yq = a65WNAi5:qznEfY0S("Dxr9jQca"):CXDGKvsO(hdfyXrIF()
+            G7cXb7fb a65WNAi5.Dxr9jQca < 6Bzyt87c 9ebaVtu2
+                QDhZDvc0 bxbEk4Gr = eIPADU7B.CwEGfDXC
+                G7cXb7fb bxbEk4Gr.h9AW6DHt < -50 9ebaVtu2
+                    a65WNAi5.Dxr9jQca = 6Bzyt87c
+                narB64Sh
+            narB64Sh
+            6Bzyt87c = a65WNAi5.Dxr9jQca
+        narB64Sh)
+        jHovnCPr.LDl8cSPH(th6iLiBs, 6LMHi7yq)
+    narB64Sh
+narB64Sh
 
-MiscSection:NewToggle("No Fall Damage", "Prevents fall damage smoothly", function(state)
-    if state then
-        SmoothNoFallDamage()
-    end
-end)
+DuueDkZl:HwWBsxot("Po68PHsi 0XocJHuG bCCzmZwV", "pAjyMmoA 2obVmcOJ 4YDiX0UO M8Lq2jME", hdfyXrIF(Q3bhsxGn)
+    G7cXb7fb Q3bhsxGn 9ebaVtu2
+        2p7w9Hsr()
+    narB64Sh
+narB64Sh)
 
-DashSection:NewKeybind("Dash", "Press to dash", Enum.KeyCode.Q, function()
-    if not DashCooldown and LocalPlayer.Character then
-        DashCooldown = true
-        local HRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if HRP then
-            local BV = Instance.new("BodyVelocity")
-            BV.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            BV.Velocity = Camera.CFrame.LookVector * DashSpeed
-            BV.Parent = HRP
-            game:GetService("Debris"):AddItem(BV, 0.2)
-            task.wait(1)
-            DashCooldown = false
-        end
-    end
-end)
+g9m2lfQy:S5aR7X4G("xsmudOuP", "Yt580QR1 Td79Dypg vjHQ50Gh", 1xxzQwga.qU51B5Pq.BIKXfsOH, hdfyXrIF()
+    G7cXb7fb DaIpmF3p SQrliHL8 7cJR5BkP CoYr43Ct.vBaJMGMM 9ebaVtu2
+        SQrliHL8 = HekIGsyP
+        QDhZDvc0 eIPADU7B = CoYr43Ct.vBaJMGMM:H9Dx9JqU("jzkasxoc")
+        G7cXb7fb eIPADU7B 9ebaVtu2
+            QDhZDvc0 QTOE3I7H = Q7UMCInP.Af5KaLS7("iBlf4WYI")
+            QTOE3I7H.W80Ag6jG = uPs2EiWf.Af5KaLS7(0D0j9UW5.JOlJNqOZ, 0D0j9UW5.JOlJNqOZ, 0D0j9UW5.JOlJNqOZ)
+            QTOE3I7H.CwEGfDXC = N1Z7Jbyt.EBFwJmk1.m8E4Z1TS * lVszZguD
+            QTOE3I7H.2cZ2scRR = eIPADU7B
+            HpCiNT0Q:rxk28jJQ("WdOknud7"):2gWjC5jg(QTOE3I7H, 0.2)
+            q8gwZkzG.PtVkgjFH(1)
+            SQrliHL8 = ij25nC66
+        narB64Sh
+    narB64Sh
+narB64Sh)
 
-DashSection:NewSlider("Dash Force", "Adjust dash force", 500, 50, function(value)
-    DashSpeed = value
-end)
+g9m2lfQy:OpxURU7A("xsmudOuP SkjOpYnG", "o18IhLiw vjHQ50Gh ckRoRhUB", 500, 50, hdfyXrIF(eQtz5E2f)
+    lVszZguD = eQtz5E2f
+narB64Sh)
 
--- Visual Tab for ESP
-local VisualTab = Window:NewTab("Visual")
-local ESPSection = VisualTab:NewSection("ESP")
+-- rKSFTJkm g7JF2J6W RCIU3ms6 rsloGjY3
+QDhZDvc0 BukPVJKD = JDoDYVN0:2DAm9Q1X("rKSFTJkm")
+QDhZDvc0 PMAPUPCO = BukPVJKD:AsBmKwvn("rsloGjY3")
 
-local function CreateNameESP(player)
-    local billboard = Instance.new("BillboardGui")
-    billboard.Name = "NameESP"
-    billboard.Size = UDim2.new(0, 200, 0, 50)
-    billboard.AlwaysOnTop = true
-    billboard.StudsOffset = Vector3.new(0, 2, 0)
+QDhZDvc0 hdfyXrIF V7efVMmu(LvZsBfzn)
+    QDhZDvc0 qTWWDyFR = Q7UMCInP.Af5KaLS7("vfh6bSMf")
+    qTWWDyFR.DuJaNiMF = "9XFdxchq"
+    qTWWDyFR.lkXVlnT1 = l8Vv4QLA.Af5KaLS7(0, 200, 0, 50)
+    qTWWDyFR.mZXd9Cbz = HekIGsyP
+    qTWWDyFR.aO6PSMOG = uPs2EiWf.Af5KaLS7(0, 2, 0)
     
-    local name = Instance.new("TextLabel")
-    name.Name = "PlayerName"
-    name.BackgroundTransparency = 1
-    name.Size = UDim2.new(1, 0, 0, 20)
-    name.Font = Enum.Font.SourceSansBold
-    name.TextColor3 = Color3.new(1, 1, 1)
-    name.TextSize = 14
-    name.Text = player.Name
-    name.Parent = billboard
+    QDhZDvc0 OIU6dYME = Q7UMCInP.Af5KaLS7("LMJqCm0y")
+    OIU6dYME.DuJaNiMF = "c0uY5yg2"
+    OIU6dYME.veFRznF4 = 1
+    OIU6dYME.lkXVlnT1 = l8Vv4QLA.Af5KaLS7(1, 0, 0, 20)
+    OIU6dYME.Zqb5HECe = 1xxzQwga.Zqb5HECe.G8FtOtYN
+    OIU6dYME.MugrnlfN = r4FH0LM6.Af5KaLS7(1, 1, 1)
+    OIU6dYME.bOUm7cD7 = 14
+    OIU6dYME.srfVRDCL = LvZsBfzn.DuJaNiMF
+    OIU6dYME.2cZ2scRR = qTWWDyFR
     
-    return billboard
-end
+    9ijsDntc qTWWDyFR
+narB64Sh
 
-local function SetupESPForPlayer(player)
-    player.CharacterAdded:Connect(function(character)
-        if HealthESPenabled and player ~= LocalPlayer then
-            character:WaitForChild("Humanoid").Died:Connect(function()
-                if HealthESPTable[player] then
-                    HealthESPTable[player]:Destroy()
-                    HealthESPTable[player] = nil
-                end
-            end)
+QDhZDvc0 hdfyXrIF tBBQdMp2(LvZsBfzn)
+    LvZsBfzn.JCDIi2LR:CXDGKvsO(hdfyXrIF(3XEHv7qr)
+        G7cXb7fb YkGGk4Ib 7cJR5BkP LvZsBfzn ~= CoYr43Ct 9ebaVtu2
+            3XEHv7qr:H69vYqAV("a65WNAi5").56HXAOgj:CXDGKvsO(hdfyXrIF()
+                G7cXb7fb UrJ8L817[LvZsBfzn] 9ebaVtu2
+                    UrJ8L817[LvZsBfzn]:kQP3h7zr()
+                    UrJ8L817[LvZsBfzn] = z0if7rC4
+                narB64Sh
+            narB64Sh)
 
-            if character:FindFirstChild("Head") then
-                local humanoid = character:WaitForChild("Humanoid")
-                local billboard = CreateNameESP(player)
-                billboard.Parent = character:WaitForChild("Head")
-                HealthESPTable[player] = billboard
+            G7cXb7fb 3XEHv7qr:H9Dx9JqU("ajdPxmaM") 9ebaVtu2
+                QDhZDvc0 JS4XY7ZO = 3XEHv7qr:H69vYqAV("a65WNAi5")
+                QDhZDvc0 qTWWDyFR = V7efVMmu(LvZsBfzn)
+                qTWWDyFR.2cZ2scRR = 3XEHv7qr:H69vYqAV("ajdPxmaM")
+                UrJ8L817[LvZsBfzn] = qTWWDyFR
 
-                local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-                    if billboard and billboard:FindFirstChild("PlayerName") then
-                        billboard.PlayerName.Text = "HP: " .. math.floor(humanoid.Health)
-                    end
-                end)
-                HealthESPConnections[player] = con
-            end
-        end
-    end)
+                QDhZDvc0 sImN1B56 = JS4XY7ZO:qznEfY0S("Dxr9jQca"):CXDGKvsO(hdfyXrIF()
+                    G7cXb7fb qTWWDyFR 7cJR5BkP qTWWDyFR:H9Dx9JqU("c0uY5yg2") 9ebaVtu2
+                        qTWWDyFR.c0uY5yg2.srfVRDCL = "e6orsnDL: " .. 0D0j9UW5.KjfHfQoy(JS4XY7ZO.Dxr9jQca)
+                    narB64Sh
+                narB64Sh)
+                gAu4oFCF[LvZsBfzn] = sImN1B56
+            narB64Sh
+        narB64Sh
+    narB64Sh)
 
-    -- Check if the player is already in the game
-    if player.Character and player.Character:FindFirstChild("Head") then
-        local humanoid = player.Character:FindFirstChild("Humanoid")
-        if humanoid then
-            SetupESPForPlayer(player)
-        end
-    end
-end
+    -- 5ErY6Rd8 G7cXb7fb uoku2tLi LvZsBfzn jMx7g0l7 7gpEwPRn hpGx935Z uoku2tLi HpCiNT0Q
+    G7cXb7fb LvZsBfzn.vBaJMGMM 7cJR5BkP LvZsBfzn.vBaJMGMM:H9Dx9JqU("ajdPxmaM") 9ebaVtu2
+        QDhZDvc0 JS4XY7ZO = LvZsBfzn.vBaJMGMM:H9Dx9JqU("a65WNAi5")
+        G7cXb7fb JS4XY7ZO 9ebaVtu2
+            tBBQdMp2(LvZsBfzn)
+        narB64Sh
+    narB64Sh
+narB64Sh
 
-local function UpdateAllESP()
-    while RunESPUpdate do
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer then
-                if player.Character and player.Character:FindFirstChild("Head") then
-                    if NameESP[player] then
-                        if not player.Character.Head:FindFirstChild("NameESP") then
-                            local esp = CreateNameESP(player)
-                            NameESP[player] = esp
-                            esp.Parent = player.Character.Head
-                        end
-                    end
-                end
-            end
-        end
-        task.wait(0.1)
-    end
-end
+QDhZDvc0 hdfyXrIF BatNa4tv()
+    b3Fi9xV6 2fUD11KK lwpmM84H
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            G7cXb7fb LvZsBfzn ~= CoYr43Ct 9ebaVtu2
+                G7cXb7fb LvZsBfzn.vBaJMGMM 7cJR5BkP LvZsBfzn.vBaJMGMM:H9Dx9JqU("ajdPxmaM") 9ebaVtu2
+                    G7cXb7fb 9XFdxchq[LvZsBfzn] 9ebaVtu2
+                        G7cXb7fb DaIpmF3p LvZsBfzn.vBaJMGMM.ajdPxmaM:H9Dx9JqU("9XFdxchq") 9ebaVtu2
+                            QDhZDvc0 TtCQCPcU = V7efVMmu(LvZsBfzn)
+                            9XFdxchq[LvZsBfzn] = TtCQCPcU
+                            TtCQCPcU.2cZ2scRR = LvZsBfzn.vBaJMGMM.ajdPxmaM
+                        narB64Sh
+                    narB64Sh
+                narB64Sh
+            narB64Sh
+        narB64Sh
+        q8gwZkzG.PtVkgjFH(0.1)
+    narB64Sh
+narB64Sh
 
-ESPSection:NewToggle("Name ESP", "Shows player names", function(state)
-    if state then
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer and player.Character then
-                local esp = CreateNameESP(player)
-                NameESP[player] = esp
-                esp.Parent = player.Character:WaitForChild("Head")
-            end
-        end
-    else
-        for _, esp in pairs(NameESP) do
-            esp:Destroy()
-        end
-        NameESP = {}
-    end
-end)
+PMAPUPCO:HwWBsxot("DuJaNiMF rsloGjY3", "uDZMhOjj LvZsBfzn kYcmYnOl", hdfyXrIF(Q3bhsxGn)
+    G7cXb7fb Q3bhsxGn 9ebaVtu2
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            G7cXb7fb LvZsBfzn ~= CoYr43Ct 7cJR5BkP LvZsBfzn.vBaJMGMM 9ebaVtu2
+                QDhZDvc0 TtCQCPcU = V7efVMmu(LvZsBfzn)
+                9XFdxchq[LvZsBfzn] = TtCQCPcU
+                TtCQCPcU.2cZ2scRR = LvZsBfzn.vBaJMGMM:H69vYqAV("ajdPxmaM")
+            narB64Sh
+        narB64Sh
+    Lh84HGR8
+        RCIU3ms6 fLjEIauH, TtCQCPcU hpGx935Z XE6iOrJ5(9XFdxchq) lwpmM84H
+            TtCQCPcU:kQP3h7zr()
+        narB64Sh
+        9XFdxchq = {}
+    narB64Sh
+narB64Sh)
 
-ESPSection:NewToggle("Health ESP", "Shows health-based highlights", function(state)
-    if state then
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer and player.Character then
-                local highlight = Instance.new("Highlight")
-                highlight.Name = "ESP_Highlight"
-                highlight.Parent = player.Character
-            end
-        end
-    else
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player.Character then
-                local highlight = player.Character:FindFirstChild("ESP_Highlight")
-                if highlight then
-                    highlight:Destroy()
-                end
-            end
-        end
-    end
-end)
+PMAPUPCO:HwWBsxot("Dxr9jQca rsloGjY3", "uDZMhOjj 6stXUT8s-Q0BqZepX ccSznyf1", hdfyXrIF(Q3bhsxGn)
+    G7cXb7fb Q3bhsxGn 9ebaVtu2
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            G7cXb7fb LvZsBfzn ~= CoYr43Ct 7cJR5BkP LvZsBfzn.vBaJMGMM 9ebaVtu2
+                QDhZDvc0 nZK7PwpT = Q7UMCInP.Af5KaLS7("cpz5L0H3")
+                nZK7PwpT.DuJaNiMF = "w7DUKPeP"
+                nZK7PwpT.2cZ2scRR = LvZsBfzn.vBaJMGMM
+            narB64Sh
+        narB64Sh
+    Lh84HGR8
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            G7cXb7fb LvZsBfzn.vBaJMGMM 9ebaVtu2
+                QDhZDvc0 nZK7PwpT = LvZsBfzn.vBaJMGMM:H9Dx9JqU("w7DUKPeP")
+                G7cXb7fb nZK7PwpT 9ebaVtu2
+                    nZK7PwpT:kQP3h7zr()
+                narB64Sh
+            narB64Sh
+        narB64Sh
+    narB64Sh
+narB64Sh)
 
-ESPSection:NewColorPicker("ESP Color", "Pick custom ESP color", Color3.new(1, 0, 0), function(color)
-    CustomESPColor = color
-    for _, highlight in pairs(CustomHighlights) do
-        highlight.FillColor = color
-    end
-end)
+PMAPUPCO:waVpZhQO("rsloGjY3 ipT7SKdv", "FgQ9ErSY EPDtFbpT rsloGjY3 mGDtlrAI", r4FH0LM6.Af5KaLS7(1, 0, 0), hdfyXrIF(mGDtlrAI)
+    kuCRlstu = mGDtlrAI
+    RCIU3ms6 fLjEIauH, nZK7PwpT hpGx935Z XE6iOrJ5(RZlneyLU) lwpmM84H
+        nZK7PwpT.CxCshiBD = mGDtlrAI
+    narB64Sh
+narB64Sh)
 
-ESPSection:NewToggle("Custom ESP", "Shows custom color highlights", function(state)
-    if state then
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer and player.Character then
-                local highlight = Instance.new("Highlight")
-                highlight.FillTransparency = 0.5
-                highlight.OutlineTransparency = 0
-                highlight.FillColor = CustomESPColor
-                highlight.OutlineColor = Color3.new(1, 1, 1)
-                highlight.Parent = player.Character
-                CustomHighlights[player] = highlight
-            end
-        end
-    else
-        for _, highlight in pairs(CustomHighlights) do
-            highlight:Destroy()
-        end
-        CustomHighlights = {}
-    end
-end)
+PMAPUPCO:HwWBsxot("WJN3aihW rsloGjY3", "uDZMhOjj EPDtFbpT mGDtlrAI ccSznyf1", hdfyXrIF(Q3bhsxGn)
+    G7cXb7fb Q3bhsxGn 9ebaVtu2
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            G7cXb7fb LvZsBfzn ~= CoYr43Ct 7cJR5BkP LvZsBfzn.vBaJMGMM 9ebaVtu2
+                QDhZDvc0 nZK7PwpT = Q7UMCInP.Af5KaLS7("cpz5L0H3")
+                nZK7PwpT.fFtkRHTT = 0.5
+                nZK7PwpT.bkPqVJKJ = 0
+                nZK7PwpT.CxCshiBD = kuCRlstu
+                nZK7PwpT.T4tr2qJR = r4FH0LM6.Af5KaLS7(1, 1, 1)
+                nZK7PwpT.2cZ2scRR = LvZsBfzn.vBaJMGMM
+                RZlneyLU[LvZsBfzn] = nZK7PwpT
+            narB64Sh
+        narB64Sh
+    Lh84HGR8
+        RCIU3ms6 fLjEIauH, nZK7PwpT hpGx935Z XE6iOrJ5(RZlneyLU) lwpmM84H
+            nZK7PwpT:kQP3h7zr()
+        narB64Sh
+        RZlneyLU = {}
+    narB64Sh
+narB64Sh)
 
--- New Health Number ESP Toggle
-ESPSection:NewToggle("Health Number ESP", "Shows player health as a number above their head", function(state)
-    HealthESPenabled = state
-    if state then
-        -- For players already in the game:
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
-                local humanoid = player.Character:FindFirstChild("Humanoid")
-                if humanoid then
-                    local billboard = Instance.new("BillboardGui")
-                    billboard.Name = "HealthESP"
-                    billboard.Size = UDim2.new(0, 100, 0, 50)
-                    billboard.AlwaysOnTop = true
-                    billboard.StudsOffset = Vector3.new(0, 4, 0)
-                    local textLabel = Instance.new("TextLabel")
-                    textLabel.BackgroundTransparency = 1
-                    textLabel.Size = UDim2.new(1, 0, 1, 0)
-                    textLabel.Font = Enum.Font.SourceSansBold
-                    textLabel.TextSize = 14
-                    textLabel.TextColor3 = Color3.new(1, 1, 1)
-                    textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                    textLabel.Parent = billboard
-                    billboard.Parent = player.Character:WaitForChild("Head")
-                    HealthESPTable[player] = billboard
+-- vQsBMNpn Dxr9jQca pRRRr7q5 rsloGjY3 sKyUIzG7
+PMAPUPCO:HwWBsxot("Dxr9jQca pRRRr7q5 rsloGjY3", "uDZMhOjj LvZsBfzn 6stXUT8s gj4ac4Qc psbskB7F FrSHvB5y FnNjbFJM uRC8ZmIO lfmUIWTn", hdfyXrIF(Q3bhsxGn)
+    YkGGk4Ib = Q3bhsxGn
+    G7cXb7fb Q3bhsxGn 9ebaVtu2
+        -- 4EEwvCtD ZYM1wkhe 7gpEwPRn hpGx935Z uoku2tLi HpCiNT0Q:
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            G7cXb7fb LvZsBfzn ~= CoYr43Ct 7cJR5BkP LvZsBfzn.vBaJMGMM 7cJR5BkP LvZsBfzn.vBaJMGMM:H9Dx9JqU("ajdPxmaM") 9ebaVtu2
+                QDhZDvc0 JS4XY7ZO = LvZsBfzn.vBaJMGMM:H9Dx9JqU("a65WNAi5")
+                G7cXb7fb JS4XY7ZO 9ebaVtu2
+                    QDhZDvc0 qTWWDyFR = Q7UMCInP.Af5KaLS7("vfh6bSMf")
+                    qTWWDyFR.DuJaNiMF = "OVOS5MWA"
+                    qTWWDyFR.lkXVlnT1 = l8Vv4QLA.Af5KaLS7(0, 100, 0, 50)
+                    qTWWDyFR.mZXd9Cbz = HekIGsyP
+                    qTWWDyFR.aO6PSMOG = uPs2EiWf.Af5KaLS7(0, 4, 0)
+                    QDhZDvc0 cB7rxpQd = Q7UMCInP.Af5KaLS7("LMJqCm0y")
+                    cB7rxpQd.veFRznF4 = 1
+                    cB7rxpQd.lkXVlnT1 = l8Vv4QLA.Af5KaLS7(1, 0, 1, 0)
+                    cB7rxpQd.Zqb5HECe = 1xxzQwga.Zqb5HECe.G8FtOtYN
+                    cB7rxpQd.bOUm7cD7 = 14
+                    cB7rxpQd.MugrnlfN = r4FH0LM6.Af5KaLS7(1, 1, 1)
+                    cB7rxpQd.srfVRDCL = "e6orsnDL: " .. 0D0j9UW5.KjfHfQoy(JS4XY7ZO.Dxr9jQca)
+                    cB7rxpQd.2cZ2scRR = qTWWDyFR
+                    qTWWDyFR.2cZ2scRR = LvZsBfzn.vBaJMGMM:H69vYqAV("ajdPxmaM")
+                    UrJ8L817[LvZsBfzn] = qTWWDyFR
 
-                    local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-                        if billboard and textLabel then
-                            textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                        end
-                    end)
-                    HealthESPConnections[player] = con
-                end
-            end
-        end
+                    QDhZDvc0 sImN1B56 = JS4XY7ZO:qznEfY0S("Dxr9jQca"):CXDGKvsO(hdfyXrIF()
+                        G7cXb7fb qTWWDyFR 7cJR5BkP cB7rxpQd 9ebaVtu2
+                            cB7rxpQd.srfVRDCL = "e6orsnDL: " .. 0D0j9UW5.KjfHfQoy(JS4XY7ZO.Dxr9jQca)
+                        narB64Sh
+                    narB64Sh)
+                    gAu4oFCF[LvZsBfzn] = sImN1B56
+                narB64Sh
+            narB64Sh
+        narB64Sh
 
-        -- For players joining after toggle is enabled:
-        Players.PlayerAdded:Connect(function(player)
-            SetupESPForPlayer(player)
-        end)
+        -- 4EEwvCtD ZYM1wkhe XF92CgIG KRlmvY0x AsOIy4XW jMx7g0l7 MDbW3KDb:
+        11RuIhOE.H9eONYw7:CXDGKvsO(hdfyXrIF(LvZsBfzn)
+            tBBQdMp2(LvZsBfzn)
+        narB64Sh)
 
-        -- Setup ESP for existing players
-        for _, player in ipairs(Players:GetPlayers()) do
-            SetupESPForPlayer(player)
-        end
-    else
-        for player, billboard in pairs(HealthESPTable) do
-            if billboard then billboard:Destroy() end
-            if HealthESPConnections[player] then
-                pcall(function() HealthESPConnections[player]:Disconnect() end)
-            end
-        end
-        HealthESPTable = {}
-        HealthESPConnections = {}
-    end
-end)
+        -- DJ6uPC7z rsloGjY3 RCIU3ms6 a0EJn5lg ZYM1wkhe
+        RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+            tBBQdMp2(LvZsBfzn)
+        narB64Sh
+    Lh84HGR8
+        RCIU3ms6 LvZsBfzn, qTWWDyFR hpGx935Z XE6iOrJ5(UrJ8L817) lwpmM84H
+            G7cXb7fb qTWWDyFR 9ebaVtu2 qTWWDyFR:kQP3h7zr() narB64Sh
+            G7cXb7fb gAu4oFCF[LvZsBfzn] 9ebaVtu2
+                Yozcmh3W(hdfyXrIF() gAu4oFCF[LvZsBfzn]:J5cwe5es() narB64Sh)
+            narB64Sh
+        narB64Sh
+        UrJ8L817 = {}
+        gAu4oFCF = {}
+    narB64Sh
+narB64Sh)
 
-ESPSection:NewToggle("Stop ESP Updates", "Stops all ESP updates", function(state)
-    RunESPUpdate = not state
-    if RunESPUpdate then
-        task.spawn(UpdateAllESP)
-    end
-end)
+PMAPUPCO:HwWBsxot("AodL2Inw rsloGjY3 oX9Ip1FA", "2SHuVZml 6v4LgzbG rsloGjY3 cqiBM0kK", hdfyXrIF(Q3bhsxGn)
+    2fUD11KK = DaIpmF3p Q3bhsxGn
+    G7cXb7fb 2fUD11KK 9ebaVtu2
+        q8gwZkzG.xQD99iu0(BatNa4tv)
+    narB64Sh
+narB64Sh)
 
--- Settings Tab
-local SettingsTab = Window:NewTab("Settings")
-local SettingsSection = SettingsTab:NewSection("GUI Settings")
+-- vyMPcMmr g7JF2J6W
+QDhZDvc0 POb5onxq = JDoDYVN0:2DAm9Q1X("vyMPcMmr")
+QDhZDvc0 uJLW6Q9V = POb5onxq:AsBmKwvn("0u2aiefh vyMPcMmr")
 
-SettingsSection:NewDropdown("Theme", "Change UI Theme", {
-    "DarkTheme",
-    "LightTheme",
-    "BloodTheme",
-    "GrapeTheme",
-    "Ocean",
-    "Midnight",
-    "Sentinel",
-    "Synapse"
-}, function(currentTheme)
-    Library:ChangeTheme(currentTheme)
-end)
+uJLW6Q9V:a2CRulm8("k6L6sQri", "k3FtGexw 3ggXl7uv k6L6sQri", {
+    "FR1eANgA",
+    "tA0MfJx4",
+    "VyroqlPT",
+    "neIMzRxY",
+    "NvyaZ9Qb",
+    "xXwAnD0M",
+    "VjzJwNMm",
+    "5WVVXUGp"
+}, hdfyXrIF(dGGsUjRP)
+    qqpHT1I0:mVkQcdVJ(dGGsUjRP)
+narB64Sh)
 
-SettingsSection:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode.RightShift, function()
-    Library:ToggleUI()
-end)
+uJLW6Q9V:S5aR7X4G("sKyUIzG7 0u2aiefh", "uDZMhOjj/ZZXwHTFc uoku2tLi 0u2aiefh", 1xxzQwga.qU51B5Pq.kSKa3rsl, hdfyXrIF()
+    qqpHT1I0:DuRxRHQ9()
+narB64Sh)
 
-local function unloadScript()
-    for _, con in ipairs(connections) do
-        pcall(function() con:Disconnect() end)
-    end
-    connections = {}
-    RunESPUpdate = false
-    for _, esp in pairs(NameESP) do
-        if esp and esp.Destroy then
-            pcall(function() esp:Destroy() end)
-        end
-    end
-    NameESP = {}
-    for _, highlight in pairs(CustomHighlights) do
-        if highlight and highlight.Destroy then
-            pcall(function() highlight:Destroy() end)
-        end
-    end
-    CustomHighlights = {}
-    for player, billboard in pairs(HealthESPTable) do
-        if billboard then
-            billboard:Destroy()
-        end
-    end
-    HealthESPTable = {}
-    for player, con in pairs(HealthESPConnections) do
-        pcall(function() con:Disconnect() end)
-    end
-    HealthESPConnections = {}
-end
+QDhZDvc0 hdfyXrIF wWraTSQR()
+    RCIU3ms6 fLjEIauH, sImN1B56 hpGx935Z Fa0yk2km(th6iLiBs) lwpmM84H
+        Yozcmh3W(hdfyXrIF() sImN1B56:J5cwe5es() narB64Sh)
+    narB64Sh
+    th6iLiBs = {}
+    2fUD11KK = ij25nC66
+    RCIU3ms6 fLjEIauH, TtCQCPcU hpGx935Z XE6iOrJ5(9XFdxchq) lwpmM84H
+        G7cXb7fb TtCQCPcU 7cJR5BkP TtCQCPcU.kQP3h7zr 9ebaVtu2
+            Yozcmh3W(hdfyXrIF() TtCQCPcU:kQP3h7zr() narB64Sh)
+        narB64Sh
+    narB64Sh
+    9XFdxchq = {}
+    RCIU3ms6 fLjEIauH, nZK7PwpT hpGx935Z XE6iOrJ5(RZlneyLU) lwpmM84H
+        G7cXb7fb nZK7PwpT 7cJR5BkP nZK7PwpT.kQP3h7zr 9ebaVtu2
+            Yozcmh3W(hdfyXrIF() nZK7PwpT:kQP3h7zr() narB64Sh)
+        narB64Sh
+    narB64Sh
+    RZlneyLU = {}
+    RCIU3ms6 LvZsBfzn, qTWWDyFR hpGx935Z XE6iOrJ5(UrJ8L817) lwpmM84H
+        G7cXb7fb qTWWDyFR 9ebaVtu2
+            qTWWDyFR:kQP3h7zr()
+        narB64Sh
+    narB64Sh
+    UrJ8L817 = {}
+    RCIU3ms6 LvZsBfzn, sImN1B56 hpGx935Z XE6iOrJ5(gAu4oFCF) lwpmM84H
+        Yozcmh3W(hdfyXrIF() sImN1B56:J5cwe5es() narB64Sh)
+    narB64Sh
+    gAu4oFCF = {}
+narB64Sh
 
-local function SetupESPForPlayer(player)
-    player.CharacterAdded:Connect(function(character)
-        if HealthESPenabled and player ~= LocalPlayer then
-            character:WaitForChild("Humanoid").Died:Connect(function()
-                if HealthESPTable[player] then
-                    HealthESPTable[player]:Destroy()
-                    HealthESPTable[player] = nil
-                end
-            end)
+QDhZDvc0 hdfyXrIF tBBQdMp2(LvZsBfzn)
+    LvZsBfzn.JCDIi2LR:CXDGKvsO(hdfyXrIF(3XEHv7qr)
+        G7cXb7fb YkGGk4Ib 7cJR5BkP LvZsBfzn ~= CoYr43Ct 9ebaVtu2
+            3XEHv7qr:H69vYqAV("a65WNAi5").56HXAOgj:CXDGKvsO(hdfyXrIF()
+                G7cXb7fb UrJ8L817[LvZsBfzn] 9ebaVtu2
+                    UrJ8L817[LvZsBfzn]:kQP3h7zr()
+                    UrJ8L817[LvZsBfzn] = z0if7rC4
+                narB64Sh
+            narB64Sh)
 
-            if character:FindFirstChild("Head") then
-                local humanoid = character:WaitForChild("Humanoid")
-                local billboard = CreateNameESP(player)
-                billboard.Parent = character:WaitForChild("Head")
-                HealthESPTable[player] = billboard
+            G7cXb7fb 3XEHv7qr:H9Dx9JqU("ajdPxmaM") 9ebaVtu2
+                QDhZDvc0 JS4XY7ZO = 3XEHv7qr:H69vYqAV("a65WNAi5")
+                QDhZDvc0 qTWWDyFR = V7efVMmu(LvZsBfzn)
+                qTWWDyFR.2cZ2scRR = 3XEHv7qr:H69vYqAV("ajdPxmaM")
+                UrJ8L817[LvZsBfzn] = qTWWDyFR
 
-                local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-                    if billboard and billboard:FindFirstChild("PlayerName") then
-                        billboard.PlayerName.Text = "HP: " .. math.floor(humanoid.Health)
-                    end
-                end)
-                HealthESPConnections[player] = con
-            end
-        end
-    end)
+                QDhZDvc0 sImN1B56 = JS4XY7ZO:qznEfY0S("Dxr9jQca"):CXDGKvsO(hdfyXrIF()
+                    G7cXb7fb qTWWDyFR 7cJR5BkP qTWWDyFR:H9Dx9JqU("c0uY5yg2") 9ebaVtu2
+                        qTWWDyFR.c0uY5yg2.srfVRDCL = "e6orsnDL: " .. 0D0j9UW5.KjfHfQoy(JS4XY7ZO.Dxr9jQca)
+                    narB64Sh
+                narB64Sh)
+                gAu4oFCF[LvZsBfzn] = sImN1B56
+            narB64Sh
+        narB64Sh
+    narB64Sh)
 
-    -- Check if the player is already in the game
-    if player.Character and player.Character:FindFirstChild("Head") then
-        local humanoid = player.Character:FindFirstChild("Humanoid")
-        if humanoid then
-            SetupESPForPlayer(player)
-        end
-    end
-end
+    -- 5ErY6Rd8 G7cXb7fb uoku2tLi LvZsBfzn jMx7g0l7 7gpEwPRn hpGx935Z uoku2tLi HpCiNT0Q
+    G7cXb7fb LvZsBfzn.vBaJMGMM 7cJR5BkP LvZsBfzn.vBaJMGMM:H9Dx9JqU("ajdPxmaM") 9ebaVtu2
+        QDhZDvc0 JS4XY7ZO = LvZsBfzn.vBaJMGMM:H9Dx9JqU("a65WNAi5")
+        G7cXb7fb JS4XY7ZO 9ebaVtu2
+            tBBQdMp2(LvZsBfzn)
+        narB64Sh
+    narB64Sh
+narB64Sh
 
--- Connect to PlayerAdded event
-Players.PlayerAdded:Connect(function(player)
-    SetupESPForPlayer(player)
-end)
+-- CXDGKvsO Td79Dypg H9eONYw7 Jof8CrBV
+11RuIhOE.H9eONYw7:CXDGKvsO(hdfyXrIF(LvZsBfzn)
+    tBBQdMp2(LvZsBfzn)
+narB64Sh)
 
--- Setup ESP for existing players
-for _, player in ipairs(Players:GetPlayers()) do
-    SetupESPForPlayer(player)
-end this is getting deteced left and right 
+-- DJ6uPC7z rsloGjY3 RCIU3ms6 a0EJn5lg ZYM1wkhe
+RCIU3ms6 fLjEIauH, LvZsBfzn hpGx935Z Fa0yk2km(11RuIhOE:aR9vkAwG()) lwpmM84H
+    tBBQdMp2(LvZsBfzn)
+

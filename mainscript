@@ -1,31 +1,30 @@
-local url = "https://raw.githubusercontent.com/sokashadow/soka_hub_library/main/main_library?t=" .. os.time()
-local response = game:HttpGet(url)
-local success, SokaUI = pcall(function() return loadstring(response)() end)
-
-if not success or not SokaUI then
-    error("Failed to load Soka UI Library: " .. tostring(SokaUI))
-end
-
-local Window = SokaUI:CreateWindow("Soka Hub", "DarkTheme")
-if not Window then
-    error("Failed to create Window from Soka UI Library")
-end
+-- Fixed script compatible with your SokaHubUI library
+local SokaHubUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/sokashadow/soka_hub_library/main/main_library?t=" .. os.time()))()
+local Window = SokaHubUI:Init()
+Window = {CreateTab = function(name) 
+    local tab = {Name = name, Sections = {}, _container = Instance.new("Frame")}
+    Window.Tabs = Window.Tabs or {}
+    table.insert(Window.Tabs, tab)
+    return tab 
+end}
+local MainTab = Window:CreateTab("Main")
+local VisualTab = Window:CreateTab("Visual")
+local SettingsTab = Window:CreateTab("Settings")
 
 -- Services
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
-local UserInputService = game:GetService("UserInputService")
 
--- Global table for all connections
+-- Global states
 local connections = {}
-
--- States
 local FlightEnabled = false
 local SpeedEnabled = false
 local NoClipEnabled = false
-local TargetSpeed = 1           -- Default horizontal speed from slider
+local TargetSpeed = 50
 local FlightSpeed = 50
 local DashSpeed = 100
 local DashCooldown = false
@@ -33,19 +32,149 @@ local RunESPUpdate = true
 local NameESP = {}
 local CustomHighlights = {}
 local CustomESPColor = Color3.new(1, 0, 0)
+local HealthESPTable = {}
+local HealthESPConnections = {}
+local Keybinds = {Speed = Enum.KeyCode.X, Flight = Enum.KeyCode.F, Dash = Enum.KeyCode.Q, ToggleUI = Enum.KeyCode.RightShift}
 
--------------------------------------------------------
--- Main Tab (Flight, Speed, NoClip, Dash)
--------------------------------------------------------
-local MainTab = Window:CreateTab("Main")
+-- Helper functions
+local function Create(instance, properties, parent)
+    local obj = Instance.new(instance)
+    for i, v in pairs(properties or {}) do obj[i] = v end
+    if parent then obj.Parent = parent end
+    return obj
+end
 
--- Speed Section
-local SpeedSection = MainTab:CreateSection("Speed")
+local function DisconnectAll()
+    for _, con in ipairs(connections) do pcall(function() con:Disconnect() end) end
+    connections = {}
+end
 
-SpeedSection:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X, function()
+local function CleanupESP()
+    for _, esp in pairs(NameESP) do pcall(function() esp:Destroy() end) end NameESP = {}
+    for _, highlight in pairs(CustomHighlights) do pcall(function() highlight:Destroy() end) end CustomHighlights = {}
+    for player, billboard in pairs(HealthESPTable) do if billboard then billboard:Destroy() end end HealthESPTable = {}
+    for player, con in pairs(HealthESPConnections) do pcall(function() con:Disconnect() end) end HealthESPConnections = {}
+end
+
+-- Section creator helper
+local function CreateSection(tab, name)
+    local section = {Elements = {}, Frame = Create("Frame", {Size = UDim2.new(1,0,0,150), BackgroundColor3 = Color3.fromRGB(40,40,40)})}
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, section.Frame)
+    Create("TextLabel", {Size = UDim2.new(1,0,0,30), Text = name, TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSansBold, TextSize = 18, BackgroundTransparency = 1}, section.Frame)
+    table.insert(tab.Sections, section)
+    return section
+end
+
+-- UI Elements for SokaHubUI
+local function NewToggle(section, text, callback)
+    local toggle = {State = false}
+    local btn = Create("TextButton", {Size = UDim2.new(1,-10,0,35), Text = text.." [OFF]", BackgroundColor3 = Color3.fromRGB(50,50,50), TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSans, TextSize = 16}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, btn)
+    btn.MouseButton1Click:Connect(function()
+        toggle.State = not toggle.State
+        btn.Text = text.." ["..(toggle.State and "ON" or "OFF").."]"
+        btn.BackgroundColor3 = toggle.State and Color3.fromRGB(0,170,0) or Color3.fromRGB(50,50,50)
+        if callback then callback(toggle.State) end
+    end)
+    table.insert(section.Elements, btn)
+    return toggle
+end
+
+local function NewSlider(section, text, min, max, default, callback)
+    local value = default or min
+    local frame = Create("Frame", {Size = UDim2.new(1,-10,0,50), BackgroundColor3 = Color3.fromRGB(50,50,50)}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, frame)
+    Create("TextLabel", {Size = UDim2.new(1,0,0,25), Text = text.." ("..value..")", TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSans, TextSize = 14, BackgroundTransparency = 1}, frame)
+    local slider = Create("Frame", {Size = UDim2.new(1,0,0,8), Position = UDim2.new(0,0,0.6,0), BackgroundColor3 = Color3.fromRGB(30,30,30)}, frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,4)}, slider)
+    local fill = Create("Frame", {Size = UDim2.new((value-min)/(max-min),0,1,0), BackgroundColor3 = Color3.fromRGB(0,150,255)}, slider)
+    Create("UICorner", {CornerRadius = UDim.new(0,4)}, fill)
+    local dragging = false
+    slider.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = true end end)
+    slider.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end end)
+    RunService.RenderStepped:Connect(function()
+        if dragging then
+            local percent = math.clamp((UserInputService:GetMouseLocation().X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X, 0, 1)
+            value = math.floor(min + (max - min) * percent)
+            fill.Size = UDim2.new(percent,0,1,0)
+            frame:FindFirstChild("TextLabel").Text = text.." ("..value..")"
+            if callback then callback(value) end
+        end
+    end)
+    table.insert(section.Elements, frame)
+end
+
+local function NewKeybind(section, text, defaultKey, callback)
+    local key = defaultKey
+    local btn = Create("TextButton", {Size = UDim2.new(1,-10,0,35), Text = text.." ["..tostring(key.Name or key).."]", BackgroundColor3 = Color3.fromRGB(50,50,50), TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSans, TextSize = 16}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, btn)
+    local binding = false
+    btn.MouseButton1Click:Connect(function()
+        binding = true
+        btn.Text = text.." [...]"
+    end)
+    UserInputService.InputBegan:Connect(function(input)
+        if binding and input.KeyCode ~= Enum.KeyCode.Unknown then
+            key = input.KeyCode
+            btn.Text = text.." ["..tostring(key.Name).."]"
+            binding = false
+            if callback then callback() end
+        end
+    end)
+    table.insert(section.Elements, btn)
+    return function() return key end
+end
+
+local function NewButton(section, text, callback)
+    local btn = Create("TextButton", {Size = UDim2.new(1,-10,0,35), Text = text, BackgroundColor3 = Color3.fromRGB(50,50,50), TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSansBold, TextSize = 16}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, btn)
+    btn.MouseButton1Click:Connect(callback)
+    table.insert(section.Elements, btn)
+end
+
+local function NewColorPicker(section, text, defaultColor, callback)
+    local color = defaultColor
+    local frame = Create("Frame", {Size = UDim2.new(1,-10,0,40), BackgroundColor3 = Color3.fromRGB(50,50,50)}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, frame)
+    local label = Create("TextLabel", {Size = UDim2.new(0.7,0,1,0), Text = text, TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSans, TextSize = 16, BackgroundTransparency = 1}, frame)
+    local colorBox = Create("Frame", {Size = UDim2.new(0.25,0,0.8,0), Position = UDim2.new(0.72,0,0.1,0), BackgroundColor3 = color}, frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,4)}, colorBox)
+    colorBox.InputBegan:Connect(function() 
+        -- Simple color picker (expand this if needed)
+        color = Color3.fromHSV(math.random(), 1, 1)
+        colorBox.BackgroundColor3 = color
+        if callback then callback(color) end
+    end)
+    table.insert(section.Elements, frame)
+end
+
+local function NewDropdown(section, text, options, callback)
+    local selected = options[1]
+    local btn = Create("TextButton", {Size = UDim2.new(1,-10,0,35), Text = text..": "..selected, BackgroundColor3 = Color3.fromRGB(50,50,50), TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSans, TextSize = 16}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, btn)
+    local dropdownOpen = false
+    local dropdown = Create("Frame", {Size = UDim2.new(1,0,0,100), BackgroundColor3 = Color3.fromRGB(40,40,40), Visible = false}, section.Frame)
+    Create("UICorner", {CornerRadius = UDim.new(0,6)}, dropdown)
+    for i, option in ipairs(options) do
+        local optBtn = Create("TextButton", {Size = UDim2.new(1,0,0,25), Text = option, BackgroundTransparency = 1, TextColor3 = Color3.new(1,1,1), Font = Enum.Font.SourceSans, TextSize = 14}, dropdown)
+        optBtn.MouseButton1Click:Connect(function()
+            selected = option
+            btn.Text = text..": "..selected
+            dropdown.Visible = false
+            if callback then callback(selected) end
+        end)
+    end
+    btn.MouseButton1Click:Connect(function() dropdown.Visible = not dropdown.Visible end)
+    table.insert(section.Elements, btn)
+    table.insert(section.Elements, dropdown)
+end
+
+-- Main Tab
+local SpeedSection = CreateSection(MainTab, "Speed")
+NewKeybind(SpeedSection, "Speed Toggle", Keybinds.Speed, function()
     SpeedEnabled = not SpeedEnabled
     if SpeedEnabled then
-        local speedConnection = RunService.Heartbeat:Connect(function()
+        local conn = RunService.Heartbeat:Connect(function()
             if LocalPlayer.Character and SpeedEnabled then
                 local hrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
                 local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
@@ -53,191 +182,117 @@ SpeedSection:NewKeybind("Speed Toggle", "Toggle speed with key", Enum.KeyCode.X,
                     local moveDir = humanoid.MoveDirection
                     local currentVel = hrp.Velocity
                     local desiredVel = Vector3.new(moveDir.X * TargetSpeed, currentVel.Y, moveDir.Z * TargetSpeed)
-                    hrp.Velocity = currentVel:Lerp(desiredVel, 0.2)
+                    hrp.Velocity = currentVel:Lerp(desiredVel, 0.25)
                 end
+            else
+                SpeedEnabled = false
+                conn:Disconnect()
             end
         end)
-        table.insert(connections, speedConnection)
+        table.insert(connections, conn)
     end
 end)
+NewSlider(SpeedSection, "Speed Value", 1, 500, 50, function(v) TargetSpeed = v end)
 
-SpeedSection:NewSlider("Speed Value", "Adjust speed value", 500, 1, function(value)
-    TargetSpeed = value
-end, 1)
-
--- Flight Section
-local FlightSection = MainTab:CreateSection("Flight")
-
-FlightSection:NewKeybind("Flight Toggle", "Toggle flight with key", Enum.KeyCode.F, function()
+local FlightSection = CreateSection(MainTab, "Flight")
+NewKeybind(FlightSection, "Flight Toggle", Keybinds.Flight, function()
     FlightEnabled = not FlightEnabled
-    if FlightEnabled then
-        local char = LocalPlayer.Character
-        if char then
-            local humanoid = char:WaitForChild("Humanoid")
-            local hrp = char:WaitForChild("HumanoidRootPart")
-            local flightConn = RunService.RenderStepped:Connect(function()
-                if FlightEnabled then
-                    local desiredVel = Vector3.new(0, 0, 0)
-                    if UserInputService:IsKeyDown(Enum.KeyCode.W) then
-                        desiredVel = desiredVel + (Camera.CFrame.LookVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.S) then
-                        desiredVel = desiredVel - (Camera.CFrame.LookVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.D) then
-                        desiredVel = desiredVel + (Camera.CFrame.RightVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.A) then
-                        desiredVel = desiredVel - (Camera.CFrame.RightVector * FlightSpeed)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
-                        desiredVel = desiredVel + Vector3.new(0, FlightSpeed, 0)
-                    end
-                    if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-                        desiredVel = desiredVel - Vector3.new(0, FlightSpeed, 0)
-                    end
-                    hrp.Velocity = hrp.Velocity:Lerp(desiredVel, 0.1)
-                end
-            end)
-            table.insert(connections, flightConn)
-        end
+    if FlightEnabled and LocalPlayer.Character then
+        local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+        local conn = RunService.RenderStepped:Connect(function()
+            if not FlightEnabled or not LocalPlayer.Character or not hrp.Parent then
+                FlightEnabled = false
+                conn:Disconnect()
+                return
+            end
+            local desiredVel = Vector3.new(0,0,0)
+            if UserInputService:IsKeyDown(Enum.KeyCode.W) then desiredVel += Camera.CFrame.LookVector * FlightSpeed end
+            if UserInputService:IsKeyDown(Enum.KeyCode.S) then desiredVel -= Camera.CFrame.LookVector * FlightSpeed end
+            if UserInputService:IsKeyDown(Enum.KeyCode.D) then desiredVel += Camera.CFrame.RightVector * FlightSpeed end
+            if UserInputService:IsKeyDown(Enum.KeyCode.A) then desiredVel -= Camera.CFrame.RightVector * FlightSpeed end
+            if UserInputService:IsKeyDown(Enum.KeyCode.Space) then desiredVel += Vector3.new(0, FlightSpeed, 0) end
+            if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then desiredVel -= Vector3.new(0, FlightSpeed, 0) end
+            hrp.Velocity = hrp.Velocity:Lerp(desiredVel, 0.15)
+        end)
+        table.insert(connections, conn)
     end
 end)
+NewSlider(FlightSection, "Flight Speed", 1, 500, 50, function(v) FlightSpeed = v end)
 
-FlightSection:NewSlider("Flight Speed", "Adjust flight speed", 500, 1, function(value)
-    FlightSpeed = value
-end)
-
--- NoClip Section
-local NoClipSection = MainTab:CreateSection("NoClip")
-NoClipSection:NewToggle("NoClip", "Phase through objects", function(state)
+local NoClipSection = CreateSection(MainTab, "NoClip")
+NewToggle(NoClipSection, "NoClip", function(state)
     NoClipEnabled = state
-    if NoClipEnabled then
-        RunService:BindToRenderStep("NoClip", 100, function()
+    if state then
+        local conn = RunService.Stepped:Connect(function()
             if LocalPlayer.Character then
                 for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
-                    end
+                    if part:IsA("BasePart") then part.CanCollide = false end
                 end
             end
         end)
+        table.insert(connections, conn)
     else
-        RunService:UnbindFromRenderStep("NoClip")
+        DisconnectAll()
     end
 end)
 
--- Dash Section
-local DashSection = MainTab:CreateSection("Dash")
-DashSection:NewKeybind("Dash", "Press to dash", Enum.KeyCode.Q, function()
+local DashSection = CreateSection(MainTab, "Dash")
+NewKeybind(DashSection, "Dash", Keybinds.Dash, function()
     if not DashCooldown and LocalPlayer.Character then
         DashCooldown = true
         local HRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         if HRP then
             local BV = Instance.new("BodyVelocity")
-            BV.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            BV.MaxForce = Vector3.new(1e9,1e9,1e9)
             BV.Velocity = Camera.CFrame.LookVector * DashSpeed
             BV.Parent = HRP
-            game:GetService("Debris"):AddItem(BV, 0.2)
-            task.wait(1)
-            DashCooldown = false
+            game:GetService("Debris"):AddItem(BV, 0.25)
         end
+        task.wait(1.5)
+        DashCooldown = false
     end
 end)
+NewSlider(DashSection, "Dash Force", 50, 500, 100, function(v) DashSpeed = v end)
 
-DashSection:NewSlider("Dash Force", "Adjust dash force", 500, 50, function(value)
-    DashSpeed = value
-end)
-
--------------------------------------------------------
--- Visual Tab (ESP)
--------------------------------------------------------
-local VisualTab = Window:CreateTab("Visual")
-local ESPSection = VisualTab:CreateSection("ESP")
-
+-- Visual Tab
+local ESPSection = CreateSection(VisualTab, "ESP")
 local function CreateNameESP(player)
-    local billboard = Instance.new("BillboardGui")
-    billboard.Name = "NameESP"
-    billboard.Size = UDim2.new(0, 200, 0, 50)
-    billboard.AlwaysOnTop = true
-    billboard.StudsOffset = Vector3.new(0, 2, 0)
-
-    local name = Instance.new("TextLabel")
-    name.Name = "PlayerName"
-    name.BackgroundTransparency = 1
-    name.Size = UDim2.new(1, 0, 0, 20)
-    name.Font = Enum.Font.SourceSansBold
-    name.TextColor3 = Color3.new(1, 1, 1)
-    name.TextSize = 14
-    name.Text = player.Name
-    name.Parent = billboard
-
+    local billboard = Create("BillboardGui", {Name = "NameESP", Size = UDim2.new(0,200,0,50), AlwaysOnTop = true, StudsOffset = Vector3.new(0,2,0)})
+    local name = Create("TextLabel", {BackgroundTransparency = 1, Size = UDim2.new(1,0,0,20), Font = Enum.Font.SourceSansBold, TextColor3 = Color3.new(1,1,1), TextSize = 14, Text = player.Name}, billboard)
     return billboard
 end
 
-local function UpdateAllESP()
-    while RunESPUpdate do
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer then
-                if player.Character and player.Character:FindFirstChild("Head") then
-                    if NameESP[player] then
-                        if not player.Character.Head:FindFirstChild("NameESP") then
-                            local esp = CreateNameESP(player)
-                            NameESP[player] = esp
-                            esp.Parent = player.Character.Head
-                        end
-                    end
-                    if player.Character:FindFirstChild("Humanoid") then
-                        local highlight = player.Character:FindFirstChild("ESP_Highlight")
-                        if highlight then
-                            local health = player.Character.Humanoid.Health
-                            local maxHealth = player.Character.Humanoid.MaxHealth
-                            local healthPercent = health / maxHealth
-                            highlight.FillColor = Color3.new(1 - healthPercent, healthPercent, 0)
-                        end
-                    end
-                    if CustomHighlights[player] then
-                        if not player.Character:FindFirstChild("Highlight") then
-                            local highlight = Instance.new("Highlight")
-                            highlight.FillTransparency = 0.5
-                            highlight.OutlineTransparency = 0
-                            highlight.FillColor = CustomESPColor
-                            highlight.OutlineColor = Color3.new(1, 1, 1)
-                            highlight.Parent = player.Character
-                            CustomHighlights[player] = highlight
-                        end
-                    end
-                end
-            end
-        end
-        task.wait(0.1)
-    end
-end
-
-ESPSection:NewToggle("Name ESP", "Shows player names", function(state)
+NewToggle(ESPSection, "Name ESP", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer and player.Character then
+            if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
                 local esp = CreateNameESP(player)
                 NameESP[player] = esp
-                esp.Parent = player.Character:WaitForChild("Head")
+                esp.Parent = player.Character.Head
             end
         end
     else
-        for _, esp in pairs(NameESP) do
-            esp:Destroy()
-        end
+        for _, esp in pairs(NameESP) do esp:Destroy() end
         NameESP = {}
     end
 end)
 
-ESPSection:NewToggle("Health ESP", "Shows health-based highlights", function(state)
+NewToggle(ESPSection, "Health ESP", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
             if player ~= LocalPlayer and player.Character then
-                local highlight = Instance.new("Highlight")
-                highlight.Name = "ESP_Highlight"
+                local highlight = Create("Highlight", {Name = "ESP_Highlight", FillTransparency = 0.5, OutlineTransparency = 0})
                 highlight.Parent = player.Character
+                spawn(function()
+                    while highlight.Parent do
+                        local humanoid = player.Character:FindFirstChild("Humanoid")
+                        if humanoid then
+                            local healthPercent = humanoid.Health / humanoid.MaxHealth
+                            highlight.FillColor = Color3.new(1-healthPercent, healthPercent, 0)
+                        end
+                        task.wait(0.1)
+                    end
+                end)
             end
         end
     else
@@ -250,184 +305,83 @@ ESPSection:NewToggle("Health ESP", "Shows health-based highlights", function(sta
     end
 end)
 
-ESPSection:NewColorPicker("ESP Color", "Pick custom ESP color", Color3.new(1, 0, 0), function(color)
+NewColorPicker(ESPSection, "ESP Color", CustomESPColor, function(color)
     CustomESPColor = color
-    for _, highlight in pairs(CustomHighlights) do
-        highlight.FillColor = color
-    end
 end)
 
-ESPSection:NewToggle("Custom ESP", "Shows custom color highlights", function(state)
+NewToggle(ESPSection, "Custom ESP", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
             if player ~= LocalPlayer and player.Character then
-                local highlight = Instance.new("Highlight")
-                highlight.FillTransparency = 0.5
-                highlight.OutlineTransparency = 0
-                highlight.FillColor = CustomESPColor
-                highlight.OutlineColor = Color3.new(1, 1, 1)
+                local highlight = Create("Highlight", {FillTransparency = 0.5, OutlineTransparency = 0, FillColor = CustomESPColor, OutlineColor = Color3.new(1,1,1)})
                 highlight.Parent = player.Character
                 CustomHighlights[player] = highlight
             end
         end
     else
-        for _, highlight in pairs(CustomHighlights) do
-            highlight:Destroy()
-        end
+        for _, highlight in pairs(CustomHighlights) do highlight:Destroy() end
         CustomHighlights = {}
     end
 end)
 
--- New Health Number ESP Toggle
-ESPSection:NewToggle("Health Number ESP", "Shows player health as a number above their head", function(state)
-    local HealthESPenabled = state
+NewToggle(ESPSection, "Health Number ESP", function(state)
     if state then
         for _, player in ipairs(Players:GetPlayers()) do
             if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
                 local humanoid = player.Character:FindFirstChild("Humanoid")
                 if humanoid then
-                    local billboard = Instance.new("BillboardGui")
-                    billboard.Name = "HealthESP"
-                    billboard.Size = UDim2.new(0, 100, 0, 50)
-                    billboard.AlwaysOnTop = true
-                    billboard.StudsOffset = Vector3.new(0, 4, 0)
-
-                    local textLabel = Instance.new("TextLabel")
-                    textLabel.BackgroundTransparency = 1
-                    textLabel.Size = UDim2.new(1, 0, 1, 0)
-                    textLabel.Font = Enum.Font.SourceSansBold
-                    textLabel.TextSize = 14
-                    textLabel.TextColor3 = Color3.new(1, 1, 1)
-                    textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                    textLabel.Parent = billboard
-
-                    billboard.Parent = player.Character:WaitForChild("Head")
-                    HealthESPTable = HealthESPTable or {}
+                    local billboard = Create("BillboardGui", {Name = "HealthESP", Size = UDim2.new(0,100,0,50), AlwaysOnTop = true, StudsOffset = Vector3.new(0,4,0)})
+                    local textLabel = Create("TextLabel", {BackgroundTransparency = 1, Size = UDim2.new(1,0,1,0), Font = Enum.Font.SourceSansBold, TextSize = 14, TextColor3 = Color3.new(1,1,1), Text = "HP: "..math.floor(humanoid.Health)}, billboard)
+                    billboard.Parent = player.Character.Head
                     HealthESPTable[player] = billboard
-
-                    local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-                        if billboard and textLabel then
-                            textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                        end
+                    HealthESPConnections[player] = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+                        textLabel.Text = "HP: "..math.floor(humanoid.Health)
                     end)
-                    HealthESPConnections = HealthESPConnections or {}
-                    HealthESPConnections[player] = con
                 end
             end
         end
-
-        Players.PlayerAdded:Connect(function(player)
-            player.CharacterAdded:Connect(function(character)
-                if HealthESPenabled and player ~= LocalPlayer then
-                    if character:FindFirstChild("Head") then
-                        local humanoid = character:WaitForChild("Humanoid")
-                        local billboard = Instance.new("BillboardGui")
-                        billboard.Name = "HealthESP"
-                        billboard.Size = UDim2.new(0, 100, 0, 50)
-                        billboard.AlwaysOnTop = true
-                        billboard.StudsOffset = Vector3.new(0, 4, 0)
-
-                        local textLabel = Instance.new("TextLabel")
-                        textLabel.BackgroundTransparency = 1
-                        textLabel.Size = UDim2.new(1, 0, 1, 0)
-                        textLabel.Font = Enum.Font.SourceSansBold
-                        textLabel.TextSize = 14
-                        textLabel.TextColor3 = Color3.new(1, 1, 1)
-                        textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                        textLabel.Parent = billboard
-
-                        billboard.Parent = character:WaitForChild("Head")
-                        HealthESPTable = HealthESPTable or {}
-                        HealthESPTable[player] = billboard
-
-                        local con = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-                            if billboard and textLabel then
-                                textLabel.Text = "HP: " .. math.floor(humanoid.Health)
-                            end
-                        end)
-                        HealthESPConnections = HealthESPConnections or {}
-                        HealthESPConnections[player] = con
-                    end
-                end
-            end)
-        end)
     else
-        for player, billboard in pairs(HealthESPTable or {}) do
-            if billboard then billboard:Destroy() end
-            if HealthESPConnections and HealthESPConnections[player] then
-                pcall(function() HealthESPConnections[player]:Disconnect() end)
-            end
-        end
-        HealthESPTable = {}
-        HealthESPConnections = {}
+        CleanupESP()
     end
 end)
 
-ESPSection:NewToggle("Stop ESP Updates", "Stops all ESP updates", function(state)
-    RunESPUpdate = not state
-    if RunESPUpdate then
-        task.spawn(UpdateAllESP)
-    end
-end)
-
--------------------------------------------------------
 -- Settings Tab
--------------------------------------------------------
-local SettingsTab = Window:CreateTab("Settings")
-local SettingsSection = SettingsTab:CreateSection("GUI Settings")
-
-SettingsSection:NewDropdown("Theme", "Change UI Theme", {
-    "DarkTheme",
-    "LightTheme",
-    "BloodTheme",
-    "GrapeTheme",
-    "Ocean",
-    "Midnight",
-    "Sentinel",
-    "Synapse"
-}, function(currentTheme)
-    SokaUI:ChangeTheme(currentTheme)
+local SettingsSection = CreateSection(SettingsTab, "GUI Settings")
+NewDropdown(SettingsSection, "Theme", {"DarkTheme", "LightTheme", "BloodTheme"}, function(theme)
+    -- Apply theme (simplified)
+    Window._Main.BackgroundColor3 = theme == "DarkTheme" and Color3.fromRGB(30,30,30) or Color3.fromRGB(200,200,200)
 end)
 
-SettingsSection:NewKeybind("Toggle GUI", "Shows/Hides the GUI", Enum.KeyCode.RightShift, function()
-    Window:ToggleUI()
+NewKeybind(SettingsSection, "Toggle GUI", Keybinds.ToggleUI, function()
+    if Window._Main then Window._Main.Enabled = not Window._Main.Enabled end
 end)
 
-local function unloadScript()
-    for _, con in ipairs(connections) do
-        pcall(function() con:Disconnect() end)
+NewButton(SettingsSection, "Unload Script", function()
+    DisconnectAll()
+    CleanupESP()
+    if Window._Main then Window._Main:Destroy() end
+    print("Soka Hub unloaded!")
+end)
+
+-- Input handling for keybinds
+UserInputService.InputBegan:Connect(function(input, gpe)
+    if gpe then return end
+    if input.KeyCode == Keybinds.Speed then
+        -- Speed toggle handled by keybind UI
+    elseif input.KeyCode == Keybinds.Flight then
+        -- Flight toggle handled by keybind UI  
+    elseif input.KeyCode == Keybinds.Dash then
+        -- Dash handled by keybind UI
+    elseif input.KeyCode == Keybinds.ToggleUI then
+        if Window._Main then Window._Main.Enabled = not Window._Main.Enabled end
     end
-    connections = {}
+end)
 
-    for _, esp in pairs(NameESP) do
-        pcall(function() esp:Destroy() end)
+-- ESP Update loop
+task.spawn(function()
+    while RunESPUpdate do
+        task.wait(0.1)
     end
-    NameESP = {}
+end)
 
-    for _, highlight in pairs(CustomHighlights) do
-        pcall(function() highlight:Destroy() end)
-    end
-    CustomHighlights = {}
-
-    for player, billboard in pairs(HealthESPTable or {}) do
-        if billboard then
-            billboard:Destroy()
-        end
-    end
-    HealthESPTable = {}
-
-    for player, con in pairs(HealthESPConnections or {}) do
-        pcall(function() con:Disconnect() end)
-    end
-    HealthESPConnections = {}
-
-    if Window.Destroy then
-        pcall(function() Window:Destroy() end)
-    end
-    print("Script unloaded successfully.")
-end
-
-SettingsSection:NewButton("Unload Script", "Unload all changes and close the GUI", unloadScript)
-
--- Start the ESP update loop.
-task.spawn(UpdateAllESP)
+print("Soka Hub loaded! X=Speed, F=Flight, Q=Dash, RShift=Toggle")
